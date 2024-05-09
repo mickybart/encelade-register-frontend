@@ -1,5 +1,6 @@
 import 'package:encelade/controller/home.dart';
 import 'package:encelade/model/types/record_state.dart';
+import 'package:encelade/view/common/icon_progress.dart';
 import 'package:encelade/view/common/snackbar.dart';
 import 'package:encelade/view/home/bottom_sheet_button.dart';
 import 'package:encelade/view/home/record_tile.dart';
@@ -43,7 +44,7 @@ class HomePage extends GetView<HomeController> {
               itemCount: controller.records.length,
               itemBuilder: (context, index) => RecordTile(
                 record: controller.records[index],
-                onTap: _onListItemTap,
+                onTap: (record) => _onListItemTap(record, controller),
               ),
               separatorBuilder: (context, index) => const Divider(),
             );
@@ -57,56 +58,75 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
-  void _onListItemTap(Record record) {
-    debugPrint(record.id);
+  void _onListItemTap(Record record, HomeController controller) {
     switch (record.state) {
       case RecordState.draft:
         Get.bottomSheet(
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                BottomSheetButton.icon(
-                  icon: const Icon(Icons.edit),
-                  label: const Text('edit'),
-                  onPressed: () => controller.onUpdateDraft(record),
+          PopScope(
+            canPop: false,
+            onPopInvoked: controller.onPop,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Obx(
+                () => Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    BottomSheetButton.icon(
+                      icon: const Icon(Icons.edit),
+                      label: const Text('edit'),
+                      onPressed: controller.actionInProgress
+                          ? null
+                          : () => controller.onUpdateDraft(record),
+                    ),
+                    BottomSheetButton.icon(
+                      icon: controller.submitInProgress.isFalse
+                          ? const Icon(Icons.done)
+                          : const IconProgress(),
+                      label: controller.submitInProgress.isFalse
+                          ? const Text('submit')
+                          : const Text('submitting...'),
+                      onPressed: controller.actionInProgress
+                          ? null
+                          : () async {
+                              try {
+                                await controller.onSubmitDraft(record);
+                                controller.onGoBack();
+                              } on Exception catch (e) {
+                                showSnackbarErrorTo('submit the draft', e);
+                              }
+                            },
+                    ),
+                    const Divider(),
+                    BottomSheetButton.icon(
+                      icon: controller.deleteInProgress.isFalse
+                          ? const Icon(Icons.delete_forever)
+                          : const IconProgress(color: Colors.red,),
+                      label: controller.deleteInProgress.isFalse
+                          ? const Text('delete permanently')
+                          : const Text('deleting...'),
+                      onPressed: controller.actionInProgress
+                          ? null
+                          : () async {
+                              try {
+                                await controller.onDeleteDraft(record);
+                                controller.onGoBack();
+                              } on Exception catch (e) {
+                                showSnackbarErrorTo('delete the draft', e);
+                              }
+                            },
+                      color: Colors.red,
+                    ),
+                    const Spacer(),
+                    Center(
+                      child: ElevatedButton.icon(
+                        onPressed: controller.onCancel,
+                        icon: const Icon(Icons.cancel),
+                        label: const Text('cancel'),
+                      ),
+                    )
+                  ],
                 ),
-                BottomSheetButton.icon(
-                  icon: const Icon(Icons.done),
-                  label: const Text('submit'),
-                  onPressed: () async {
-                    try {
-                      await controller.onSubmitDraft(record);
-                      controller.onGoBack();
-                    } on Exception catch (e) {
-                      showSnackbarErrorTo('submit the draft', e);
-                    }
-                  },
-                ),
-                const Divider(),
-                BottomSheetButton.icon(
-                  icon: const Icon(Icons.delete_forever),
-                  label: const Text('delete permanently'),
-                  onPressed: () async {
-                    try {
-                      await controller.onDeleteDraft(record);
-                      controller.onGoBack();
-                    } on Exception catch (e) {
-                      showSnackbarErrorTo('delete the draft', e);
-                    }
-                  },
-                  color: Colors.red,
-                ),
-                const Spacer(),
-                Center(
-                  child: ElevatedButton.icon(
-                    onPressed: () => controller.onGoBack(),
-                    icon: const Icon(Icons.cancel),
-                    label: const Text('cancel'),
-                  ),
-                )
-              ],
+              ),
             ),
           ),
           backgroundColor: Get.theme.dialogBackgroundColor,

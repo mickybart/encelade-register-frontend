@@ -1,17 +1,16 @@
 import 'dart:async';
 
-import 'package:encelade/model/remote_register_provider.dart';
-import 'package:encelade/model/types/record.dart';
+import 'package:encelade/controller/interfaces/i_record_controller.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:get/get.dart';
 
-class InsideOutsideController extends GetxController {
-  final RemoteRegisterProvider _remoteRegisterProvider;
-  final Record _record;
+class InsideOutsideController extends IRecordController {
   late final Timer _timer;
   final time = DateTime.now().toLocal().obs;
 
-  InsideOutsideController(this._remoteRegisterProvider, this._record);
+  InsideOutsideController(super.remoteRegisterProvider, super.record) {
+    validity(true); // always valid; driven by the time !
+  }
 
   @override
   void onInit() {
@@ -29,7 +28,7 @@ class InsideOutsideController extends GetxController {
   }
 
   String get title {
-    switch (_record.state) {
+    switch (record.state) {
       case RecordState.created:
       case RecordState.collectPqrsSignature:
         /*
@@ -47,36 +46,34 @@ class InsideOutsideController extends GetxController {
     }
   }
 
-  String get id => _record.id;
-
-  void onGoBack() {
-    Get.back();
-  }
-
-  Future<void> onSetIt() async {
-    switch (_record.state) {
+  Future<void> _onSetIt() async {
+    switch (record.state) {
       case RecordState.created:
         /*
          * next step: client is inside office to collect products
          */
-        return await _remoteRegisterProvider.collectClientInside(_record.id, time.value);
+        return await remoteRegisterProvider.collectClientInside(record.id, time.value);
       case RecordState.collectPqrsSignature:
         /*
          * next step: client is inside office to return products
          */
-        return await _remoteRegisterProvider.returnClientInside(_record.id, time.value);
+        return await remoteRegisterProvider.returnClientInside(record.id, time.value);
       case RecordState.collectClientSignature:
         /*
          * next step: client goes out of office with collected products
          */
-        return await _remoteRegisterProvider.collectClientOutside(_record.id, time.value);
+        return await remoteRegisterProvider.collectClientOutside(record.id, time.value);
       case RecordState.returnClientSignature:
         /*
          * next step: client goes out of office after having returned products
          */
-        return await _remoteRegisterProvider.returnClientOutside(_record.id, time.value);
+        return await remoteRegisterProvider.returnClientOutside(record.id, time.value);
       default:
         throw Exception('not allowed for this record state !');
     }
+  }
+
+  Future<void> onSetIt() async {
+    await onRemoteCallAction(_onSetIt);
   }
 }

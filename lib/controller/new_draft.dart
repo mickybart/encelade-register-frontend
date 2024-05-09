@@ -1,23 +1,22 @@
-import 'package:encelade/model/remote_register_provider.dart';
+import 'package:encelade/controller/interfaces/i_remote_register_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class NewDraftController extends GetxController {
-  final RemoteRegisterProvider _remoteRegisterProvider;
+class NewDraftController extends IRemoteRegisterController {
   final _summary = TextEditingController();
-  final canCreateDraft = false.obs;
 
-  NewDraftController(this._remoteRegisterProvider) {
-    _summary.addListener(() { canCreateDraft.value = _summary.text.isNotEmpty; });
+  NewDraftController(super.remoteRegisterProvider) {
+    _summary.addListener(
+      () {
+        validity(_summary.text.isNotEmpty);
+      },
+    );
   }
 
   TextEditingController get summaryController => _summary;
 
-  void onGoBack() {
-    Get.back();
-  }
-
-  Future<String> onCreateDraft() async {
-    return await _remoteRegisterProvider.newDraft(_summary.text);
+  Future<void> onCreateDraft() async {
+    await onRemoteCallAction(() async {
+      await remoteRegisterProvider.newDraft(_summary.text);
+    });
   }
 }

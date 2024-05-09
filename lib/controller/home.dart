@@ -6,8 +6,25 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   final RemoteRegisterProvider _remoteRegisterProvider;
   final records = <Record>[].obs;
+  final submitInProgress = false.obs;
+  final deleteInProgress = false.obs;
 
   HomeController(this._remoteRegisterProvider);
+
+  bool get actionInProgress => submitInProgress.isTrue || deleteInProgress.isTrue;
+
+  void onPop(bool didPop) {
+    if (didPop) return;
+    onGoBack();
+  }
+
+  void onGoBack() {
+    if (submitInProgress.isFalse && deleteInProgress.isFalse) Get.back();
+  }
+
+  void onCancel() {
+    onGoBack();
+  }
 
   void onNewDraft() {
     Get.toNamed(Routes.newDraft);
@@ -15,10 +32,6 @@ class HomeController extends GetxController {
 
   void onUpdateDraft(Record record) {
     Get.offNamed(Routes.updateDraft, arguments: record);
-  }
-
-  void onGoBack() {
-    Get.back();
   }
 
   void onClientInsideOutside(Record record) {
@@ -34,11 +47,23 @@ class HomeController extends GetxController {
   }
 
   Future<void> onDeleteDraft(Record record) async {
-    await _remoteRegisterProvider.deleteDraft(record.id);
+    deleteInProgress(true);
+    
+    try {
+      await _remoteRegisterProvider.deleteDraft(record.id);
+    } finally {
+      deleteInProgress(false);
+    }
   }
 
   Future<void> onSubmitDraft(Record record) async {
-    await _remoteRegisterProvider.submitDraft(record.id);
+    submitInProgress(true);
+
+    try {
+      await _remoteRegisterProvider.submitDraft(record.id);
+    } finally {
+      submitInProgress(false);
+    }
   }
 
   Future<void> onRefresh() async {

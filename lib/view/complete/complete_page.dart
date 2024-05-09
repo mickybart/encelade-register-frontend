@@ -1,5 +1,5 @@
 import 'package:encelade/controller/complete.dart';
-import 'package:encelade/view/common/snackbar.dart';
+import 'package:encelade/view/common/scadfold_record_flow.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,53 +8,31 @@ class CompletePage extends GetView<CompleteController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ScaffoldRecordFlow(
+      controller: controller,
       appBar: AppBar(
         title: const Text('Last verifications'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Text(controller.id),
-            const Expanded(
-              child: Center(
-                child: Icon(
-                  Icons.verified,
-                  size: 64.0,
-                  color: Colors.green,
-                ),
-              ),
-            ),
-            Center(
-              child: Wrap(
-                spacing: 16.0,
-                children: [
-                  ElevatedButton.icon(
-                    onPressed: controller.onGoBack,
-                    icon: const Icon(Icons.cancel),
-                    label: const Text('cancel'),
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () async {
-                      try {
-                        await controller.onComplete();
-                        controller.onGoBack();
-                      } on Exception catch (e) {
-                        showSnackbarErrorTo('complete', e);
-                      }
-                    },
-                    icon: const Icon(Icons.verified,),
-                    label: const Text(
-                      'verified and conform',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+      primaryAction: RecordFlowAction(
+        'verified and conform',
+        'completing...',
+        Icons.verified,
+        'complete',
+        controller.onComplete,
       ),
+      spacer: false,
+      children: [
+        Text(controller.id),
+        const Expanded(
+          child: Center(
+            child: Icon(
+              Icons.verified,
+              size: 64.0,
+              color: Colors.green,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

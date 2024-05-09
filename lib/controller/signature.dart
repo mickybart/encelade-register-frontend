@@ -1,40 +1,30 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:encelade/model/remote_register_provider.dart';
-import 'package:encelade/model/types/record.dart';
+import 'package:encelade/controller/interfaces/i_record_controller.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:signature/signature.dart' as sign;
 
-class SignatureController extends GetxController {
-  final RemoteRegisterProvider _remoteRegisterProvider;
-  final Record _record;
+class SignatureController extends IRecordController {
   final _name = TextEditingController();
   final _signature = sign.SignatureController(
     penStrokeWidth: 1.0,
     exportBackgroundColor: Colors.transparent,
     exportPenColor: Colors.black,
   );
-  final canSign = false.obs;
 
-  SignatureController(this._remoteRegisterProvider, this._record) {
-    _name.addListener(
-      () {
-        canSign.value = _name.text.isNotEmpty && _signature.isNotEmpty;
-      },
-    );
+  SignatureController(super.remoteRegisterProvider, super.record) {
+    _name.addListener(_updateValidity);
+    _signature.addListener(_updateValidity);
+  }
 
-    _signature.addListener(
-      () {
-        canSign.value = _name.text.isNotEmpty && _signature.isNotEmpty;
-      },
-    );
+  void _updateValidity() {
+    validity(_name.text.isNotEmpty && _signature.isNotEmpty);
   }
 
   String get title {
-    switch (_record.state) {
+    switch (record.state) {
       case RecordState.collectClientInside:
       case RecordState.returnClientInside:
         /*
@@ -53,7 +43,7 @@ class SignatureController extends GetxController {
   }
 
   String get nameLabel {
-    switch (_record.state) {
+    switch (record.state) {
       case RecordState.collectClientInside:
       case RecordState.returnClientInside:
         /*
@@ -74,13 +64,7 @@ class SignatureController extends GetxController {
   TextEditingController get nameController => _name;
   sign.SignatureController get signatureController => _signature;
 
-  String get id => _record.id;
-
-  void onGoBack() {
-    Get.back();
-  }
-
-  Future<void> onSign() async {
+  Future<void> _onSign() async {
     final svg = _signature.toRawSVG();
     if (svg == null) throw Exception('The signature is empty !');
 
@@ -90,13 +74,13 @@ class SignatureController extends GetxController {
       ),
     );
 
-    switch (_record.state) {
+    switch (record.state) {
       case RecordState.collectClientInside:
         /*
          * next step: client signature to collect
          */
-        return await _remoteRegisterProvider.collectClientSignature(
-          _record.id,
+        return await remoteRegisterProvider.collectClientSignature(
+          record.id,
           _name.text,
           signature,
         );
@@ -104,8 +88,8 @@ class SignatureController extends GetxController {
         /*
          * next step: pqrs signature to collect
          */
-        return await _remoteRegisterProvider.collectPqrsSignature(
-          _record.id,
+        return await remoteRegisterProvider.collectPqrsSignature(
+          record.id,
           _name.text,
           signature,
         );
@@ -113,8 +97,8 @@ class SignatureController extends GetxController {
         /*
          * next step: client signature to return
          */
-        return await _remoteRegisterProvider.returnClientSignature(
-          _record.id,
+        return await remoteRegisterProvider.returnClientSignature(
+          record.id,
           _name.text,
           signature,
         );
@@ -122,14 +106,18 @@ class SignatureController extends GetxController {
         /*
          * next step: pqrs signature to return
          */
-        return await _remoteRegisterProvider.returnPqrsSignature(
-          _record.id,
+        return await remoteRegisterProvider.returnPqrsSignature(
+          record.id,
           _name.text,
           signature,
         );
       default:
         throw Exception('not allowed for this record state !');
     }
+  }
+
+  Future<void> onSign() async {
+    await onRemoteCallAction(_onSign);
   }
 
   @override

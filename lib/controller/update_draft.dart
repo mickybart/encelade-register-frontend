@@ -1,32 +1,23 @@
-import 'package:encelade/model/remote_register_provider.dart';
-import 'package:encelade/model/types/record.dart';
+import 'package:encelade/controller/interfaces/i_record_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class UpdateDraftController extends GetxController {
-  final RemoteRegisterProvider _remoteRegisterProvider;
+class UpdateDraftController extends IRecordController {
   final TextEditingController _summary;
-  final Record _record;
-  final canUpdateDraft = false.obs;
 
-  UpdateDraftController(this._remoteRegisterProvider, this._record)
-      : _summary = TextEditingController(text: _record.summary) {
+  UpdateDraftController(super.remoteRegisterProvider, super.record)
+      : _summary = TextEditingController(text: record.summary) {
     _summary.addListener(
       () {
-        canUpdateDraft.value = (_summary.text.isNotEmpty && _summary.text != _record.summary);
+        validity(_summary.text.isNotEmpty && _summary.text != record.summary);
       },
     );
   }
 
   TextEditingController get summaryController => _summary;
-  String get id => _record.id;
 
-  void onGoBack() {
-    Get.back();
-  }
-
-  Future<String> onUpdateDraft() async {
-    await _remoteRegisterProvider.updateDraft(_record.id, _summary.text);
-    return _record.id;
+  Future<void> onUpdateDraft() async {
+    await onRemoteCallAction(() async {
+      await remoteRegisterProvider.updateDraft(record.id, _summary.text);
+    });
   }
 }
