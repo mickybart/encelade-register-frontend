@@ -41,6 +41,22 @@ final $typed_data.Uint8List recordStateDescriptor = $convert.base64Decode(
     'EhkKFVJFVFVSTl9DTElFTlRfT1VUU0lERRAJEhkKFVJFVFVSTl9QUVJTX1NJR05BVFVSRRAKEg'
     '0KCUNPTVBMRVRFRBAL');
 
+@$core.Deprecated('Use eventTypeDescriptor instead')
+const EventType$json = {
+  '1': 'EventType',
+  '2': [
+    {'1': 'EMPTY_EVENT', '2': 0},
+    {'1': 'ADDED', '2': 1},
+    {'1': 'MODIFIED', '2': 2},
+    {'1': 'DELETED', '2': 3},
+  ],
+};
+
+/// Descriptor for `EventType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List eventTypeDescriptor = $convert.base64Decode(
+    'CglFdmVudFR5cGUSDwoLRU1QVFlfRVZFTlQQABIJCgVBRERFRBABEgwKCE1PRElGSUVEEAISCw'
+    'oHREVMRVRFRBAD');
+
 @$core.Deprecated('Use draftDescriptor instead')
 const Draft$json = {
   '1': 'Draft',
@@ -212,4 +228,18 @@ final $typed_data.Uint8List searchRequestDescriptor = $convert.base64Decode(
     'Cg1TZWFyY2hSZXF1ZXN0Ei0KBnN0YXRlcxgBIAMoDjIVLnJlZ2lzdGVyLlJlY29yZFN0YXRlUg'
     'ZzdGF0ZXMSMwoFcmFuZ2UYAiABKAsyGC5yZWdpc3Rlci5UaW1lc3RhbXBSYW5nZUgAUgVyYW5n'
     'ZYgBAUIICgZfcmFuZ2U=');
+
+@$core.Deprecated('Use recordEventDescriptor instead')
+const RecordEvent$json = {
+  '1': 'RecordEvent',
+  '2': [
+    {'1': 'event_type', '3': 1, '4': 1, '5': 14, '6': '.register.EventType', '10': 'eventType'},
+    {'1': 'record', '3': 2, '4': 1, '5': 11, '6': '.register.Record', '10': 'record'},
+  ],
+};
+
+/// Descriptor for `RecordEvent`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List recordEventDescriptor = $convert.base64Decode(
+    'CgtSZWNvcmRFdmVudBIyCgpldmVudF90eXBlGAEgASgOMhMucmVnaXN0ZXIuRXZlbnRUeXBlUg'
+    'lldmVudFR5cGUSKAoGcmVjb3JkGAIgASgLMhAucmVnaXN0ZXIuUmVjb3JkUgZyZWNvcmQ=');
 

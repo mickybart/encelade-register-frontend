@@ -1,9 +1,11 @@
+import 'package:encelade/model/proto/google/protobuf/empty.pb.dart' as protog_e;
 import 'package:encelade/model/proto/google/protobuf/timestamp.pb.dart'
-    as protog;
+    as protog_t;
 import 'package:encelade/model/proto/register.pbgrpc.dart' as proto;
+import 'package:encelade/model/types/event_type.dart';
 import 'package:encelade/model/types/record.dart';
+import 'package:encelade/model/types/record_event.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class RemoteRegisterProvider {
@@ -19,12 +21,10 @@ class RemoteRegisterProvider {
 
     _registerClient = proto.RegisterClient(_channel);
 
-    debugPrint('return _registerClient');
     return _registerClient!;
   }
 
   void _createChannel() {
-    debugPrint('_createChannel');
     const host = "127.0.0.1";
     const port = 50051;
 
@@ -99,11 +99,11 @@ class RemoteRegisterProvider {
     await registerClient.returnClientOutside(request);
   }
 
-  protog.Timestamp _timestampFromDateTime(DateTime time) {
+  protog_t.Timestamp _timestampFromDateTime(DateTime time) {
     final timeSecondsSinceEpoch =
         (time.millisecondsSinceEpoch / Duration.millisecondsPerSecond).round();
 
-    return protog.Timestamp(seconds: Int64(timeSecondsSinceEpoch));
+    return protog_t.Timestamp(seconds: Int64(timeSecondsSinceEpoch));
   }
 
   Future<void> collectClientSignature(
@@ -184,6 +184,33 @@ class RemoteRegisterProvider {
 
     await for (var record in response) {
       yield Record.fromProto(record);
+    }
+  }
+
+  Stream<RecordEvent> watch(Stream<Record> Function() initial) async* {
+    final request = protog_e.Empty();
+
+    // Empty event
+    final emptyEvent = proto.RecordEvent.create()
+      ..eventType = proto.EventType.EMPTY_EVENT;
+
+    // create the stream but does not read it
+    // generate empty event when there is no event since a long time (2 sec)
+    // this is a workaround to permit frontend to disable the stream when
+    // user will toggle sync on/off
+    final response = registerClient.watch(request).timeout(
+          const Duration(seconds: 2),
+          onTimeout: (sink) => sink.add(emptyEvent),
+        );
+
+    // preload initial data that will be updated by incoming events later
+    await for (var record in initial()) {
+      yield RecordEvent(EventType.added, record);
+    }
+
+    // listen changes
+    await for (var event in response) {
+      yield RecordEvent.fromProto(event);
     }
   }
 }

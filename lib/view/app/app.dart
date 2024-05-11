@@ -34,7 +34,7 @@ class App extends GetView<AppController> {
       getPages: [
         GetPage(
           name: Routes.home,
-          page: () => const HomePage(appTitle: appTitle),
+          page: () => HomePage(appTitle: appTitle),
           binding: HomeBinding(),
         ),
         GetPage(

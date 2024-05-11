@@ -10,9 +10,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends GetView<HomeController> {
-  const HomePage({super.key, required this.appTitle});
+  HomePage({super.key, required this.appTitle}) {
+    _onWatch();
+  }
 
   final String appTitle;
+
+  Future<void> _onWatch() async {
+    try {
+      await controller.onWatch();
+    } on Exception catch (e) {
+      showSnackbarErrorTo('sync records', e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +30,20 @@ class HomePage extends GetView<HomeController> {
       appBar: AppBar(
         title: Text(appTitle),
         actions: [
-          IconButton(
-            onPressed: () async {
-              try {
-                await controller.onRefresh();
-              } on Exception catch (e) {
-                showSnackbarErrorTo('refresh the list', e);
-              }
-            },
-            icon: const Icon(Icons.refresh),
+          Obx(
+            () => IconButton(
+              onPressed: controller.isSyncActive
+                  ? controller.onStopWatchRequest
+                  : _onWatch,
+              icon: controller.isSyncActive
+                  ? const Icon(Icons.sync)
+                  : controller.isSyncError
+                      ? const Icon(
+                          Icons.sync_problem,
+                          color: Colors.red,
+                        )
+                      : const Icon(Icons.sync_disabled),
+            ),
           ),
         ],
       ),
@@ -100,7 +115,9 @@ class HomePage extends GetView<HomeController> {
                     BottomSheetButton.icon(
                       icon: controller.deleteInProgress.isFalse
                           ? const Icon(Icons.delete_forever)
-                          : const IconProgress(color: Colors.red,),
+                          : const IconProgress(
+                              color: Colors.red,
+                            ),
                       label: controller.deleteInProgress.isFalse
                           ? const Text('delete permanently')
                           : const Text('deleting...'),

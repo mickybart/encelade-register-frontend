@@ -82,6 +82,10 @@ class RegisterClient extends $grpc.Client {
       '/register.Register/SearchById',
       ($0.RecordID value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.Record.fromBuffer(value));
+  static final _$watch = $grpc.ClientMethod<$1.Empty, $0.RecordEvent>(
+      '/register.Register/Watch',
+      ($1.Empty value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.RecordEvent.fromBuffer(value));
 
   RegisterClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -147,6 +151,10 @@ class RegisterClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.Record> searchById($0.RecordID request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$searchById, request, options: options);
+  }
+
+  $grpc.ResponseStream<$0.RecordEvent> watch($1.Empty request, {$grpc.CallOptions? options}) {
+    return $createStreamingCall(_$watch, $async.Stream.fromIterable([request]), options: options);
   }
 }
 
@@ -260,6 +268,13 @@ abstract class RegisterServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.RecordID.fromBuffer(value),
         ($0.Record value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.Empty, $0.RecordEvent>(
+        'Watch',
+        watch_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
+        ($0.RecordEvent value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.RecordID> newDraft_Pre($grpc.ServiceCall call, $async.Future<$0.Draft> request) async {
@@ -322,6 +337,10 @@ abstract class RegisterServiceBase extends $grpc.Service {
     return searchById(call, await request);
   }
 
+  $async.Stream<$0.RecordEvent> watch_Pre($grpc.ServiceCall call, $async.Future<$1.Empty> request) async* {
+    yield* watch(call, await request);
+  }
+
   $async.Future<$0.RecordID> newDraft($grpc.ServiceCall call, $0.Draft request);
   $async.Future<$1.Empty> updateDraft($grpc.ServiceCall call, $0.Draft request);
   $async.Future<$1.Empty> deleteDraft($grpc.ServiceCall call, $0.RecordID request);
@@ -337,4 +356,5 @@ abstract class RegisterServiceBase extends $grpc.Service {
   $async.Future<$1.Empty> complete($grpc.ServiceCall call, $0.RecordID request);
   $async.Stream<$0.Record> search($grpc.ServiceCall call, $0.SearchRequest request);
   $async.Future<$0.Record> searchById($grpc.ServiceCall call, $0.RecordID request);
+  $async.Stream<$0.RecordEvent> watch($grpc.ServiceCall call, $1.Empty request);
 }

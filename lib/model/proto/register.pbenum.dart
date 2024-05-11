@@ -48,5 +48,24 @@ class RecordState extends $pb.ProtobufEnum {
   const RecordState._($core.int v, $core.String n) : super(v, n);
 }
 
+class EventType extends $pb.ProtobufEnum {
+  static const EventType EMPTY_EVENT = EventType._(0, _omitEnumNames ? '' : 'EMPTY_EVENT');
+  static const EventType ADDED = EventType._(1, _omitEnumNames ? '' : 'ADDED');
+  static const EventType MODIFIED = EventType._(2, _omitEnumNames ? '' : 'MODIFIED');
+  static const EventType DELETED = EventType._(3, _omitEnumNames ? '' : 'DELETED');
+
+  static const $core.List<EventType> values = <EventType> [
+    EMPTY_EVENT,
+    ADDED,
+    MODIFIED,
+    DELETED,
+  ];
+
+  static final $core.Map<$core.int, EventType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static EventType? valueOf($core.int value) => _byValue[value];
+
+  const EventType._($core.int v, $core.String n) : super(v, n);
+}
+
 
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

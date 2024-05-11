@@ -748,6 +748,72 @@ class SearchRequest extends $pb.GeneratedMessage {
   TimestampRange ensureRange() => $_ensure(1);
 }
 
+class RecordEvent extends $pb.GeneratedMessage {
+  factory RecordEvent({
+    EventType? eventType,
+    Record? record,
+  }) {
+    final $result = create();
+    if (eventType != null) {
+      $result.eventType = eventType;
+    }
+    if (record != null) {
+      $result.record = record;
+    }
+    return $result;
+  }
+  RecordEvent._() : super();
+  factory RecordEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RecordEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RecordEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'register'), createEmptyInstance: create)
+    ..e<EventType>(1, _omitFieldNames ? '' : 'eventType', $pb.PbFieldType.OE, defaultOrMaker: EventType.EMPTY_EVENT, valueOf: EventType.valueOf, enumValues: EventType.values)
+    ..aOM<Record>(2, _omitFieldNames ? '' : 'record', subBuilder: Record.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RecordEvent clone() => RecordEvent()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RecordEvent copyWith(void Function(RecordEvent) updates) => super.copyWith((message) => updates(message as RecordEvent)) as RecordEvent;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RecordEvent create() => RecordEvent._();
+  RecordEvent createEmptyInstance() => create();
+  static $pb.PbList<RecordEvent> createRepeated() => $pb.PbList<RecordEvent>();
+  @$core.pragma('dart2js:noInline')
+  static RecordEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RecordEvent>(create);
+  static RecordEvent? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  EventType get eventType => $_getN(0);
+  @$pb.TagNumber(1)
+  set eventType(EventType v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasEventType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEventType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  Record get record => $_getN(1);
+  @$pb.TagNumber(2)
+  set record(Record v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRecord() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRecord() => clearField(2);
+  @$pb.TagNumber(2)
+  Record ensureRecord() => $_ensure(1);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
