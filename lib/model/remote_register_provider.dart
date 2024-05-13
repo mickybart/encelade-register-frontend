@@ -4,6 +4,7 @@ import 'package:encelade/model/proto/google/protobuf/timestamp.pb.dart'
 import 'package:encelade/model/proto/register.pbgrpc.dart' as proto;
 import 'package:encelade/model/types/event_type.dart';
 import 'package:encelade/model/types/record.dart';
+import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/model/types/record_event.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
@@ -178,6 +179,18 @@ class RemoteRegisterProvider {
         proto.RecordState.RETURN_CLIENT_OUTSIDE,
         proto.RecordState.RETURN_PQRS_SIGNATURE,
       ],
+    );
+
+    final response = registerClient.search(request);
+
+    await for (var record in response) {
+      yield Record.fromProto(record);
+    }
+  }
+
+  Stream<Record> getRecords(List<RecordState> states) async* {
+    final request = proto.SearchRequest(
+      states: states.map((e) => proto.RecordState.values[e.index]).toList(),
     );
 
     final response = registerClient.search(request);

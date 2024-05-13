@@ -3,7 +3,7 @@ import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/view/common/icon_progress.dart';
 import 'package:encelade/view/common/snackbar.dart';
 import 'package:encelade/view/home/bottom_sheet_button.dart';
-import 'package:encelade/view/home/record_tile.dart';
+import 'package:encelade/view/common/record_tile.dart';
 import 'package:encelade/model/types/record.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +45,10 @@ class HomePage extends GetView<HomeController> {
                       : const Icon(Icons.sync_disabled),
             ),
           ),
+          IconButton(
+            onPressed: controller.onHistory,
+            icon: const Icon(Icons.history),
+          ),
         ],
       ),
       body: Obx(
@@ -59,7 +63,7 @@ class HomePage extends GetView<HomeController> {
               itemCount: controller.records.length,
               itemBuilder: (context, index) => RecordTile(
                 record: controller.records[index],
-                onTap: (record) => _onListItemTap(record, controller),
+                onTap: (record) => _onListItemTap(record),
               ),
               separatorBuilder: (context, index) => const Divider(),
             );
@@ -73,7 +77,7 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
-  void _onListItemTap(Record record, HomeController controller) {
+  void _onListItemTap(Record record) {
     switch (record.state) {
       case RecordState.draft:
         Get.bottomSheet(

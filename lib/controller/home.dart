@@ -64,6 +64,10 @@ class HomeController extends GetxController {
     Get.toNamed(Routes.complete, arguments: record);
   }
 
+  void onHistory() {
+    Get.toNamed(Routes.history);
+  }
+
   Future<void> onDeleteDraft(Record record) async {
     deleteInProgress(true);
 
@@ -81,14 +85,6 @@ class HomeController extends GetxController {
       await _remoteRegisterProvider.submitDraft(record.id);
     } finally {
       submitInProgress(false);
-    }
-  }
-
-  Future<void> onRefresh() async {
-    records.clear();
-
-    await for (var record in _remoteRegisterProvider.getRecordsNotCompleted()) {
-      records.add(record);
     }
   }
 

@@ -3,6 +3,8 @@ import 'package:encelade/view/app/app_binding.dart';
 import 'package:encelade/view/app/navigation.dart';
 import 'package:encelade/view/complete/complete_binding.dart';
 import 'package:encelade/view/complete/complete_page.dart';
+import 'package:encelade/view/history/history_binding.dart';
+import 'package:encelade/view/history/history_page.dart';
 import 'package:encelade/view/inside_outside/inside_outside_binding.dart';
 import 'package:encelade/view/inside_outside/inside_outside_page.dart';
 import 'package:encelade/view/draft/new_draft_binding.dart';
@@ -61,6 +63,11 @@ class App extends GetView<AppController> {
           name: Routes.complete,
           page: () => const CompletePage(),
           binding: CompleteBinding(),
+        ),
+        GetPage(
+          name: Routes.history,
+          page: () => HistoryPage(),
+          binding: HistoryBinding(),
         ),
       ],
     );

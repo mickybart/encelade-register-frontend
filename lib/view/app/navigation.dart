@@ -5,4 +5,5 @@ abstract class Routes {
   static const String clientInsideOutside = '/client/in-out';
   static const String signature = '/signature';
   static const String complete = '/complete';
+  static const String history = '/history';
 }
