@@ -1,6 +1,7 @@
 import 'package:encelade/controller/interfaces/i_remote_register_controller.dart';
 import 'package:encelade/model/types/record.dart';
 import 'package:encelade/model/types/record_state.dart';
+import 'package:encelade/view/app/navigation.dart';
 import 'package:get/get.dart';
 
 class HistoryController extends IRemoteRegisterController {
@@ -40,6 +41,10 @@ class HistoryController extends IRemoteRegisterController {
     final diff = settingsRange[1].difference(settingsRange[0]);
 
     return diff.inDays < 14;
+  }
+
+  void onDetails(Record record) {
+    Get.toNamed(Routes.details, arguments: record);
   }
 
   void onApplyFilter() {

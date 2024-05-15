@@ -68,6 +68,10 @@ class HomeController extends GetxController {
     Get.toNamed(Routes.history);
   }
 
+  void onDetails(Record record) {
+    Get.toNamed(Routes.details, arguments: record);
+  }
+
   Future<void> onDeleteDraft(Record record) async {
     deleteInProgress(true);
 

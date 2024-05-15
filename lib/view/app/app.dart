@@ -13,6 +13,8 @@ import 'package:encelade/view/draft/update_draft_page.dart';
 import 'package:encelade/view/home/home_binding.dart';
 import 'package:encelade/view/draft/new_draft_page.dart';
 import 'package:encelade/view/home/home_page.dart';
+import 'package:encelade/view/record/record_details_binding.dart';
+import 'package:encelade/view/record/record_details_page.dart';
 import 'package:encelade/view/signature/signature_binding.dart';
 import 'package:encelade/view/signature/signature_page.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +70,11 @@ class App extends GetView<AppController> {
           name: Routes.history,
           page: () => HistoryPage(),
           binding: HistoryBinding(),
+        ),
+        GetPage(
+          name: Routes.details,
+          page: () => const RecordDetailsPage(),
+          binding: RecordDetailsBinding(),
         ),
       ],
     );

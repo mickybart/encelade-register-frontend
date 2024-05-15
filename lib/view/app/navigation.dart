@@ -6,4 +6,5 @@ abstract class Routes {
   static const String signature = '/signature';
   static const String complete = '/complete';
   static const String history = '/history';
+  static const String details = '/record/details';
 }

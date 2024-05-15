@@ -87,7 +87,7 @@ class HistoryPage extends GetView<HistoryController> {
                     itemCount: controller.records.length,
                     itemBuilder: (context, index) => RecordTile(
                       record: controller.records[index],
-                      //onTap: (record) => {},
+                      onTap: controller.onDetails,
                     ),
                     separatorBuilder: (context, index) => const Divider(),
                   );

@@ -64,6 +64,7 @@ class HomePage extends GetView<HomeController> {
               itemBuilder: (context, index) => RecordTile(
                 record: controller.records[index],
                 onTap: (record) => _onListItemTap(record),
+                onDetailsTap: (record) => controller.onDetails(record),
               ),
               separatorBuilder: (context, index) => const Divider(),
             );
