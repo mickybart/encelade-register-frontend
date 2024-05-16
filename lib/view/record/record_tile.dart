@@ -1,6 +1,5 @@
 import 'package:encelade/model/types/record.dart';
-import 'package:encelade/model/types/record_state.dart';
-import 'package:encelade/view/common/record_style.dart';
+import 'package:encelade/view/record/record_style.dart';
 import 'package:flutter/material.dart';
 
 class RecordTile extends StatelessWidget {

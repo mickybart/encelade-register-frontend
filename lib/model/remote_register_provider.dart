@@ -1,13 +1,12 @@
 import 'package:encelade/model/proto/google/protobuf/empty.pb.dart' as protog_e;
-import 'package:encelade/model/proto/google/protobuf/timestamp.pb.dart'
-    as protog_t;
 import 'package:encelade/model/proto/register.pbgrpc.dart' as proto;
 import 'package:encelade/model/types/event_type.dart';
 import 'package:encelade/model/types/record.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/model/types/record_event.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:grpc/grpc.dart';
+
+import 'utils.dart';
 
 class RemoteRegisterProvider {
   proto.RegisterClient? _registerClient;
@@ -67,7 +66,7 @@ class RemoteRegisterProvider {
   Future<void> collectClientInside(String id, DateTime time) async {
     final request = proto.TimestampTrace(
       id: id,
-      time: _timestampFromDateTime(time),
+      time: timestampFromDateTime(time),
     );
 
     await registerClient.collectClientInside(request);
@@ -76,7 +75,7 @@ class RemoteRegisterProvider {
   Future<void> collectClientOutside(String id, DateTime time) async {
     final request = proto.TimestampTrace(
       id: id,
-      time: _timestampFromDateTime(time),
+      time: timestampFromDateTime(time),
     );
 
     await registerClient.collectClientOutside(request);
@@ -85,7 +84,7 @@ class RemoteRegisterProvider {
   Future<void> returnClientInside(String id, DateTime time) async {
     final request = proto.TimestampTrace(
       id: id,
-      time: _timestampFromDateTime(time),
+      time: timestampFromDateTime(time),
     );
 
     await registerClient.returnClientInside(request);
@@ -94,17 +93,10 @@ class RemoteRegisterProvider {
   Future<void> returnClientOutside(String id, DateTime time) async {
     final request = proto.TimestampTrace(
       id: id,
-      time: _timestampFromDateTime(time),
+      time: timestampFromDateTime(time),
     );
 
     await registerClient.returnClientOutside(request);
-  }
-
-  protog_t.Timestamp _timestampFromDateTime(DateTime time) {
-    final timeSecondsSinceEpoch =
-        (time.millisecondsSinceEpoch / Duration.millisecondsPerSecond).round();
-
-    return protog_t.Timestamp(seconds: Int64(timeSecondsSinceEpoch));
   }
 
   Future<void> collectClientSignature(
@@ -192,8 +184,8 @@ class RemoteRegisterProvider {
     final request = proto.SearchRequest(
       states: states.map((e) => proto.RecordState.values[e.index]).toList(),
       range: proto.TimestampRange(
-        begin: _timestampFromDateTime(range[0]),
-        end: _timestampFromDateTime(range[1]),
+        begin: timestampFromDateTime(range[0]),
+        end: timestampFromDateTime(range[1]),
       ),
     );
 

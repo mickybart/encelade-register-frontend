@@ -3,7 +3,7 @@ import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/view/common/icon_progress.dart';
 import 'package:encelade/view/common/snackbar.dart';
 import 'package:encelade/view/home/bottom_sheet_button.dart';
-import 'package:encelade/view/common/record_tile.dart';
+import 'package:encelade/view/record/record_tile.dart';
 import 'package:encelade/model/types/record.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +63,9 @@ class HomePage extends GetView<HomeController> {
               itemCount: controller.records.length,
               itemBuilder: (context, index) => RecordTile(
                 record: controller.records[index],
-                onTap: (record) => _onListItemTap(record),
+                onTap: _hasOnTap(controller.records[index])
+                    ? (record) => _onListItemTap(record)
+                    : null,
                 onDetailsTap: (record) => controller.onDetails(record),
               ),
               separatorBuilder: (context, index) => const Divider(),
@@ -76,6 +78,16 @@ class HomePage extends GetView<HomeController> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  bool _hasOnTap(Record record) {
+    switch (record.state) {
+      case RecordState.completed:
+      case RecordState.unspecified:
+        return false;
+      default:
+        return true;
+    }
   }
 
   void _onListItemTap(Record record) {
@@ -169,10 +181,7 @@ class HomePage extends GetView<HomeController> {
       case RecordState.returnPqrsSignature:
         controller.onComplete(record);
         break;
-      case RecordState.completed:
-      case RecordState.unspecified:
-        // nothing todo for both
-        // TODO: disable onTap
+      default:
         break;
     }
   }
