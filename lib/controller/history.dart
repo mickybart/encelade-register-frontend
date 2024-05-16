@@ -15,7 +15,7 @@ class HistoryController extends IRemoteRegisterController {
   final settingsStateCompleted = true.obs;
   final settingsStateDraft = false.obs;
   final settingsStateOthers = false.obs;
-  final settingsRange = [DateTime.now(), DateTime.now()].obs;
+  final settingsRange = _initialRange().obs;
 
   HistoryController(super.remoteRegisterProvider);
 
@@ -57,9 +57,8 @@ class HistoryController extends IRemoteRegisterController {
     stateDraft.value = settingsStateDraft.value;
     stateOthers.value = settingsStateOthers.value;
 
-    validity(
-      (stateCompleted.value || stateDraft.value || stateOthers.value) && range.length == 2
-    );
+    validity((stateCompleted.value || stateDraft.value || stateOthers.value) &&
+        range.length == 2);
   }
 
   Future<void> onRefresh() async {
@@ -83,13 +82,28 @@ class HistoryController extends IRemoteRegisterController {
       if (stateCompleted.value) RecordState.completed,
     ];
 
+    // last day is included so we need to add 1 day
+    final rangefilter = [
+      range[0],
+      range[1].add(const Duration(
+          hours: 23, minutes: 59, seconds: 59, milliseconds: 999))
+    ];
+
     await onRemoteCallAction(
       () async {
         records.clear();
-        await for (var record in remoteRegisterProvider.getRecords(states)) {
+        await for (var record
+            in remoteRegisterProvider.getRecords(states, rangefilter)) {
           records.add(record);
         }
       },
     );
   }
+}
+
+List<DateTime> _initialRange() {
+  final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
+
+  return [today, today];
 }

@@ -188,9 +188,13 @@ class RemoteRegisterProvider {
     }
   }
 
-  Stream<Record> getRecords(List<RecordState> states) async* {
+  Stream<Record> getRecords(List<RecordState> states, List<DateTime> range) async* {
     final request = proto.SearchRequest(
       states: states.map((e) => proto.RecordState.values[e.index]).toList(),
+      range: proto.TimestampRange(
+        begin: _timestampFromDateTime(range[0]),
+        end: _timestampFromDateTime(range[1]),
+      ),
     );
 
     final response = registerClient.search(request);
