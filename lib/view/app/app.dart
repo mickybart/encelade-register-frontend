@@ -13,6 +13,7 @@ import 'package:encelade/view/draft/update_draft_page.dart';
 import 'package:encelade/view/home/home_binding.dart';
 import 'package:encelade/view/draft/new_draft_page.dart';
 import 'package:encelade/view/home/home_page.dart';
+import 'package:encelade/view/pdf/pdf_preview_page.dart';
 import 'package:encelade/view/record/record_details_binding.dart';
 import 'package:encelade/view/record/record_details_page.dart';
 import 'package:encelade/view/signature/signature_binding.dart';
@@ -75,6 +76,10 @@ class App extends GetView<AppController> {
           name: Routes.details,
           page: () => const RecordDetailsPage(),
           binding: RecordDetailsBinding(),
+        ),
+        GetPage(
+          name: Routes.pdf,
+          page: () => PdfPreviewPage(controller: Get.arguments),
         ),
       ],
     );

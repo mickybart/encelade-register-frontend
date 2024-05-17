@@ -1,6 +1,7 @@
 import 'package:encelade/controller/record_details.dart';
 import 'package:encelade/view/record/record_details_state.dart';
 import 'package:encelade/view/record/record_details_traces.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +14,21 @@ class RecordDetailsPage extends GetView<RecordDetailsController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Details'),
+        actions: [
+          IconButton(
+            onPressed: controller.pdf.onSharePdf,
+            icon: const Icon(Icons.share),
+          ),
+          IconButton(
+            onPressed: controller.pdf.onPrinting,
+            icon: const Icon(Icons.print),
+          ),
+          if (kDebugMode)
+            IconButton(
+              onPressed: controller.pdf.onPdfPreview,
+              icon: const Icon(Icons.picture_as_pdf),
+            ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(8.0),

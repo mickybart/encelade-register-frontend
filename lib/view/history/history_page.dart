@@ -2,6 +2,7 @@ import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:encelade/controller/history.dart';
 import 'package:encelade/view/common/snackbar.dart';
 import 'package:encelade/view/record/record_tile.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -31,6 +32,19 @@ class HistoryPage extends GetView<HistoryController> {
               icon: const Icon(Icons.refresh),
             ),
           ),
+          IconButton(
+            onPressed: controller.pdf.onSharePdf,
+            icon: const Icon(Icons.share),
+          ),
+          IconButton(
+            onPressed: controller.pdf.onPrinting,
+            icon: const Icon(Icons.print),
+          ),
+          if (kDebugMode)
+            IconButton(
+              onPressed: controller.pdf.onPdfPreview,
+              icon: const Icon(Icons.picture_as_pdf),
+            ),
         ],
       ),
       body: Column(

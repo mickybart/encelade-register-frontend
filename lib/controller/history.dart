@@ -1,3 +1,4 @@
+import 'package:encelade/controller/pdf/history_pdf.dart';
 import 'package:encelade/controller/interfaces/i_remote_register_controller.dart';
 import 'package:encelade/model/types/record.dart';
 import 'package:encelade/model/types/record_state.dart';
@@ -17,7 +18,9 @@ class HistoryController extends IRemoteRegisterController {
   final settingsStateOthers = false.obs;
   final settingsRange = _initialRange().obs;
 
-  HistoryController(super.remoteRegisterProvider);
+  final HistoryPdfController pdf;
+
+  HistoryController(super.remoteRegisterProvider, this.pdf);
 
   @override
   void onInit() {
@@ -53,6 +56,7 @@ class HistoryController extends IRemoteRegisterController {
     }
 
     range.value = settingsRange;
+    pdf.range = settingsRange;
     stateCompleted.value = settingsStateCompleted.value;
     stateDraft.value = settingsStateDraft.value;
     stateOthers.value = settingsStateOthers.value;
@@ -92,9 +96,11 @@ class HistoryController extends IRemoteRegisterController {
     await onRemoteCallAction(
       () async {
         records.clear();
+        pdf.records.clear();
         await for (var record
             in remoteRegisterProvider.getRecords(states, rangefilter)) {
           records.add(record);
+          pdf.records.add(record);
         }
       },
     );

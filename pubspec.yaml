@@ -43,6 +43,8 @@ dependencies:
   signature: ^5.4.1
   calendar_date_picker2: ^1.0.2
   flutter_svg: ^2.0.10+1
+  pdf: ^3.10.8
+  printing: ^5.12.0
 
 dev_dependencies:
   flutter_test:
