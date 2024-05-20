@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:archive/archive_io.dart';
 import 'package:encelade/controller/interfaces/i_record_controller.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:flutter/material.dart';
@@ -68,10 +68,13 @@ class SignatureController extends IRecordController {
     final svg = _signature.toRawSVG();
     if (svg == null) throw Exception('The signature is empty !');
 
+    final gzipSvg = GZipEncoder().encode(
+      utf8.encode(svg),
+    );
+    if (gzipSvg == null) throw Exception('Gzip of the signature is empty !');
+
     final signature = base64.encode(
-      gzip.encode(
-        utf8.encode(svg),
-      ),
+      gzipSvg,
     );
 
     switch (record.state) {

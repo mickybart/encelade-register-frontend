@@ -1,16 +1,19 @@
+import 'dart:io'; // unsupported for web
+
 import 'package:encelade/model/proto/google/protobuf/empty.pb.dart' as protog_e;
 import 'package:encelade/model/proto/register.pbgrpc.dart' as proto;
 import 'package:encelade/model/types/event_type.dart';
 import 'package:encelade/model/types/record.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/model/types/record_event.dart';
-import 'package:grpc/grpc.dart';
+import 'package:flutter/foundation.dart';
+import 'package:grpc/grpc_or_grpcweb.dart';
 
 import 'utils.dart';
 
 class RemoteRegisterProvider {
   proto.RegisterClient? _registerClient;
-  late final ClientChannel _channel;
+  late final GrpcOrGrpcWebClientChannel _channel;
 
   RemoteRegisterProvider() {
     _createChannel();
@@ -25,16 +28,25 @@ class RemoteRegisterProvider {
   }
 
   void _createChannel() {
-    const host = "127.0.0.1";
-    const port = 50051;
+    String host = '127.0.0.1';
+    int port = 50051;
 
-    _channel = ClientChannel(
-      host,
-      port: port,
-      options: const ChannelOptions(
-        credentials: ChannelCredentials.insecure(),
-      ),
-    );
+    if (kIsWeb) {
+      port = 50052;
+    } else {
+      if (Platform.isAndroid) {
+        host = '10.0.2.2';
+      }
+    }
+
+    // _channel = GrpcOrGrpcWebClientChannel.grpc(
+    //   host,
+    //   port: port,
+    //   options: const ChannelOptions(
+    //     credentials: ChannelCredentials.insecure(),
+    //   ),
+    // );
+    _channel = GrpcOrGrpcWebClientChannel.toSingleEndpoint(host: host, port: port, transportSecure: false);
   }
 
   void dispose() async {

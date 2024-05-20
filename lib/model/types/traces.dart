@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:archive/archive_io.dart';
 import 'package:encelade/model/proto/register.pb.dart' as proto;
 import 'package:encelade/model/utils.dart';
 
@@ -17,7 +17,7 @@ class Signer {
   String get svgSignature {
     try {
       return utf8.decode(
-        gzip.decode(
+        GZipDecoder().decodeBytes(
           base64.decode(signature),
         ),
       );
