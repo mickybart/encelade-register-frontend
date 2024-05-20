@@ -1,4 +1,4 @@
-import 'package:encelade/controller/new_draft.dart';
+import 'package:encelade/controller/record_flow/new_draft.dart';
 import 'package:encelade/model/remote_register_provider.dart';
 import 'package:get/get.dart';
 

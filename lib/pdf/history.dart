@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/model/types/traces.dart';
-import 'package:encelade/view/record/record_style.dart';
+import 'package:encelade/view/record/styles/record_style.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';

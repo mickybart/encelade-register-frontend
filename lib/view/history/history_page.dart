@@ -1,7 +1,7 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:encelade/controller/history.dart';
 import 'package:encelade/view/common/snackbar.dart';
-import 'package:encelade/view/record/record_tile.dart';
+import 'package:encelade/view/record/widgets/record_tile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

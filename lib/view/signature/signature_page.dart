@@ -1,5 +1,5 @@
-import 'package:encelade/controller/signature.dart';
-import 'package:encelade/view/common/scadfold_record_flow.dart';
+import 'package:encelade/controller/record_flow/signature.dart';
+import 'package:encelade/view/common/widgets/scadfold_record_flow.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:signature/signature.dart' as sign;

@@ -1,6 +1,6 @@
 import 'package:encelade/controller/record_details.dart';
-import 'package:encelade/view/record/record_details_state.dart';
-import 'package:encelade/view/record/record_details_traces.dart';
+import 'package:encelade/view/record/widgets/record_details_state.dart';
+import 'package:encelade/view/record/widgets/record_details_traces.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

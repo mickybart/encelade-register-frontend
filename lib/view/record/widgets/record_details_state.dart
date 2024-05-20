@@ -1,5 +1,5 @@
 import 'package:encelade/model/types/record_state.dart';
-import 'package:encelade/view/record/record_style.dart';
+import 'package:encelade/view/record/styles/record_style.dart';
 import 'package:flutter/material.dart';
 
 class RecordDetailsState extends StatelessWidget {

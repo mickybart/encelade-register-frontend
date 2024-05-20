@@ -1,9 +1,9 @@
 import 'package:encelade/controller/home.dart';
 import 'package:encelade/model/types/record_state.dart';
-import 'package:encelade/view/common/icon_progress.dart';
+import 'package:encelade/view/common/widgets/icon_progress.dart';
 import 'package:encelade/view/common/snackbar.dart';
-import 'package:encelade/view/home/bottom_sheet_button.dart';
-import 'package:encelade/view/record/record_tile.dart';
+import 'package:encelade/view/home/widgets/bottom_sheet_button.dart';
+import 'package:encelade/view/record/widgets/record_tile.dart';
 import 'package:encelade/model/types/record.dart';
 import 'package:flutter/material.dart';
 

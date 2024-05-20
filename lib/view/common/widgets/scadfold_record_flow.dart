@@ -1,5 +1,5 @@
 import 'package:encelade/controller/interfaces/i_remote_register_controller.dart';
-import 'package:encelade/view/common/icon_progress.dart';
+import 'package:encelade/view/common/widgets/icon_progress.dart';
 import 'package:encelade/view/common/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
