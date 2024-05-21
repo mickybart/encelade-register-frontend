@@ -10,9 +10,9 @@ import 'package:encelade/view/inside_outside/inside_outside_page.dart';
 import 'package:encelade/view/draft/new_draft_binding.dart';
 import 'package:encelade/view/draft/update_draft_binding.dart';
 import 'package:encelade/view/draft/update_draft_page.dart';
-import 'package:encelade/view/home/home_binding.dart';
+import 'package:encelade/view/register/register_binding.dart';
 import 'package:encelade/view/draft/new_draft_page.dart';
-import 'package:encelade/view/home/home_page.dart';
+import 'package:encelade/view/register/register_page.dart';
 import 'package:encelade/view/pdf/pdf_preview_page.dart';
 import 'package:encelade/view/record/record_details_binding.dart';
 import 'package:encelade/view/record/record_details_page.dart';
@@ -34,13 +34,13 @@ class App extends GetView<AppController> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      initialRoute: Routes.home,
+      initialRoute: Routes.register,
       initialBinding: AppBinding(),
       getPages: [
         GetPage(
-          name: Routes.home,
-          page: () => HomePage(appTitle: appTitle),
-          binding: HomeBinding(),
+          name: Routes.register,
+          page: () => RegisterPage(appTitle: appTitle),
+          binding: RegisterBinding(),
         ),
         GetPage(
           name: Routes.newDraft,

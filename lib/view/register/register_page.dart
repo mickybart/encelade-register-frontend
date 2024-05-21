@@ -1,20 +1,18 @@
-import 'package:encelade/controller/home.dart';
+import 'package:encelade/controller/register.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/view/common/widgets/icon_progress.dart';
 import 'package:encelade/view/common/snackbar.dart';
-import 'package:encelade/view/home/widgets/bottom_sheet_button.dart';
+import 'package:encelade/view/register/widgets/bottom_sheet_button.dart';
 import 'package:encelade/view/record/widgets/record_tile.dart';
 import 'package:encelade/model/types/record.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class HomePage extends GetView<HomeController> {
-  HomePage({super.key, required this.appTitle}) {
+class RegisterPage extends GetView<RegisterController> {
+  RegisterPage({super.key}) {
     _onWatch();
   }
-
-  final String appTitle;
 
   Future<void> _onWatch() async {
     try {
@@ -28,7 +26,7 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(appTitle),
+        title: const Text('Register'),
         actions: [
           Obx(
             () => IconButton(

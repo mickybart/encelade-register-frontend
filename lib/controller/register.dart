@@ -14,14 +14,14 @@ enum SyncStatus {
   syncError,
 }
 
-class HomeController extends GetxController {
+class RegisterController extends GetxController {
   final RemoteRegisterProvider _remoteRegisterProvider;
   final records = <Record>[].obs;
   final submitInProgress = false.obs;
   final deleteInProgress = false.obs;
   final syncStatus = Rx(SyncStatus.syncOff);
 
-  HomeController(this._remoteRegisterProvider);
+  RegisterController(this._remoteRegisterProvider);
 
   bool get actionInProgress =>
       submitInProgress.isTrue || deleteInProgress.isTrue;
