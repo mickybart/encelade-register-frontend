@@ -28,26 +28,26 @@ Future<Uint8List> saveRecordDetailsPdf(
       footer: (context) => _footer(context),
       build: (context) => [
         ..._sectionDetails(
-          'rd_state'.tr,
+          'record_state'.tr,
           _recordDetailsState(record.state),
         ),
         ..._sectionDetails(
-          'rd_summary'.tr,
+          'record_summary'.tr,
           Paragraph(text: record.summary),
         ),
         if (record.created != null)
           ..._sectionDetails(
-            'rd_creation_date'.tr,
+            'record_creation_date'.tr,
             Paragraph(text: GetDateFormat.yMMMMd().format(record.created!)),
           ),
         if (record.traces.collected != null)
           ..._sectionDetails(
-            'rd_collect'.tr,
+            'record_collect'.tr,
             _recordDetailsTraces(record.traces.collected!),
           ),
         if (record.traces.returned != null)
           ..._sectionDetails(
-            'rd_return'.tr,
+            'record_return'.tr,
             _recordDetailsTraces(record.traces.returned!),
           ),
       ],
@@ -74,7 +74,7 @@ Widget _recordDetailsState(RecordState state) {
     Text(recordFriendlyState, style: TextStyle(color: recordColor)),
     if (state == RecordState.collectPqrsSignature) ...[
       SizedBox(width: 8.0),
-      Text('rs_signed_pqrs_alt'.tr, style: const TextStyle(color: PdfColors.blue)),
+      Text('state_signed_pqrs_alt'.tr, style: const TextStyle(color: PdfColors.blue)),
     ],
   ]);
 }
@@ -85,7 +85,7 @@ Widget _recordDetailsTraces(Trace trace) {
   return Column(
     children: [
       Text(
-        'rd_client'.tr,
+        'record_client'.tr,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       Table(
@@ -96,18 +96,18 @@ Widget _recordDetailsTraces(Trace trace) {
         children: [
           TableRow(
             children: [
-              Text('rd_inside_at'.tr),
+              Text('record_inside_at'.tr),
               Text(trace.inside == null
                   ? '-'
                   : dateFormat.format(trace.inside!)),
             ],
           ),
           TableRow(children: [
-            Text('rd_name'.tr),
+            Text('record_name'.tr),
             Text(trace.client == null ? '-' : trace.client!.name),
           ]),
           TableRow(children: [
-            Text('rd_signature'.tr),
+            Text('record_signature'.tr),
             trace.client == null
                 ? Text('-')
                 : SvgImage(
@@ -118,7 +118,7 @@ Widget _recordDetailsTraces(Trace trace) {
                   ),
           ]),
           TableRow(children: [
-            Text('rd_outside_at'.tr),
+            Text('record_outside_at'.tr),
             Text(trace.outside == null
                 ? '-'
                 : dateFormat.format(trace.outside!)),
@@ -127,7 +127,7 @@ Widget _recordDetailsTraces(Trace trace) {
       ),
       SizedBox(height: 8.0),
       Text(
-        'rd_pqrs'.tr,
+        'record_pqrs'.tr,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       Table(
@@ -137,11 +137,11 @@ Widget _recordDetailsTraces(Trace trace) {
         },
         children: [
           TableRow(children: [
-            Text('rd_name'.tr),
+            Text('record_name'.tr),
             Text(trace.pqrs == null ? '-' : trace.pqrs!.name),
           ]),
           TableRow(children: [
-            Text('rd_signature'.tr),
+            Text('record_signature'.tr),
             trace.pqrs == null
                 ? Text('-')
                 : SvgImage(

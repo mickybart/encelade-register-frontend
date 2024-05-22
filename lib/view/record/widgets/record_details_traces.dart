@@ -16,7 +16,7 @@ class RecordDetailsTraces extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'rd_client'.tr,
+          'record_client'.tr,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         Table(
@@ -27,18 +27,18 @@ class RecordDetailsTraces extends StatelessWidget {
           children: [
             TableRow(
               children: [
-                Text('rd_inside_at'.tr),
+                Text('record_inside_at'.tr),
                 Text(trace.inside == null
                     ? '-'
                     : dateFormat.format(trace.inside!)),
               ],
             ),
             TableRow(children: [
-              Text('rd_name'.tr),
+              Text('record_name'.tr),
               Text(trace.client == null ? '-' : trace.client!.name),
             ]),
             TableRow(children: [
-              Text('rd_signature'.tr),
+              Text('record_signature'.tr),
               trace.client == null
                   ? const Text('-')
                   : SvgPicture.string(
@@ -49,7 +49,7 @@ class RecordDetailsTraces extends StatelessWidget {
                     ),
             ]),
             TableRow(children: [
-              Text('rd_outside_at'.tr),
+              Text('record_outside_at'.tr),
               Text(trace.outside == null
                   ? '-'
                   : dateFormat.format(trace.outside!)),
@@ -60,7 +60,7 @@ class RecordDetailsTraces extends StatelessWidget {
           height: 8.0,
         ),
         Text(
-          'rd_pqrs'.tr,
+          'record_pqrs'.tr,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         Table(
@@ -70,11 +70,11 @@ class RecordDetailsTraces extends StatelessWidget {
           },
           children: [
             TableRow(children: [
-              Text('rd_name'.tr),
+              Text('record_name'.tr),
               Text(trace.pqrs == null ? '-' : trace.pqrs!.name),
             ]),
             TableRow(children: [
-              Text('rd_signature'.tr),
+              Text('record_signature'.tr),
               trace.pqrs == null
                   ? const Text('-')
                   : SvgPicture.string(

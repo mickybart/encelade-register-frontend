@@ -14,7 +14,7 @@ Future<Uint8List> saveHistoryPdf(PdfPageFormat? format, List<Record> records, Li
   final dateFormat = GetDateFormat.yMMMMd();
   final startDate = dateFormat.format(range[0]);
   final endDate = dateFormat.format(range[1]);
-  final title = 'ph_title'.trParams({'s': startDate, 'e': endDate});
+  final title = 'pdf_history_title'.trParams({'s': startDate, 'e': endDate});
 
   final pdf = Document(title: title);
 
@@ -43,18 +43,18 @@ Future<Uint8List> saveHistoryPdf(PdfPageFormat? format, List<Record> records, Li
           children: [
             TableRow(
               children: [
-                Text('ph_created'.tr),
-                Text('ph_summary'.tr),
-                Text('ph_hours'.tr, style: const TextStyle(color: PdfColors.blue)),
-                Text('ph_client'.tr, style: const TextStyle(color: PdfColors.blue)),
-                Text('ph_pqrs'.tr, style: const TextStyle(color: PdfColors.blue)),
-                Text('ph_hours'.tr,
+                Text('pdf_created'.tr),
+                Text('record_summary'.tr),
+                Text('pdf_hours'.tr, style: const TextStyle(color: PdfColors.blue)),
+                Text('record_client'.tr, style: const TextStyle(color: PdfColors.blue)),
+                Text('record_pqrs'.tr, style: const TextStyle(color: PdfColors.blue)),
+                Text('pdf_hours'.tr,
                     style: const TextStyle(color: PdfColors.lightGreen)),
-                Text('ph_client'.tr,
+                Text('record_client'.tr,
                     style: const TextStyle(color: PdfColors.lightGreen)),
-                Text('ph_pqrs'.tr,
+                Text('record_pqrs'.tr,
                     style: const TextStyle(color: PdfColors.lightGreen)),
-                Text('ph_state'.tr),
+                Text('record_state'.tr),
               ],
             ),
             ...recordsForPdf,

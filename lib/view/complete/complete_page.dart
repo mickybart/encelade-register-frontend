@@ -11,13 +11,13 @@ class CompletePage extends GetView<CompleteController> {
     return ScaffoldRecordFlow(
       controller: controller,
       appBar: AppBar(
-        title: Text('c_title'.tr),
+        title: Text('cp_title'.tr),
       ),
       primaryAction: RecordFlowAction(
-        'c_verified'.tr,
-        'c_verified_progress'.tr,
+        'cp_verified'.tr,
+        'cp_verified_progress'.tr,
         Icons.verified,
-        'c_sset_verified'.tr,
+        'cp_sset_verified'.tr,
         controller.onComplete,
       ),
       spacer: false,

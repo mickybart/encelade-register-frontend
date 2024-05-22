@@ -13,7 +13,7 @@ class RecordDetailsPage extends GetView<RecordDetailsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('rd_title'.tr),
+        title: Text('rdp_title'.tr),
         actions: [
           IconButton(
             onPressed: controller.pdf.onSharePdf,
@@ -37,26 +37,26 @@ class RecordDetailsPage extends GetView<RecordDetailsController> {
           children: [
             Text(controller.id),
             CardDetails(
-              title: 'rd_state'.tr,
+              title: 'record_state'.tr,
               child: RecordDetailsState(state: controller.record.state),
             ),
             CardDetails(
-                title: 'rd_summary'.tr, child: Text(controller.record.summary)),
+                title: 'record_summary'.tr, child: Text(controller.record.summary)),
             if (controller.record.created != null)
               CardDetails(
-                  title: 'rd_creation_date'.tr,
+                  title: 'record_creation_date'.tr,
                   child: Text(
                       GetDateFormat.yMMMMd().format(controller.record.created!))),
             if (controller.record.traces.collected != null)
               CardDetails(
-                title: 'rd_collect'.tr,
+                title: 'record_collect'.tr,
                 child: RecordDetailsTraces(
                   trace: controller.record.traces.collected!,
                 ),
               ),
             if (controller.record.traces.returned != null)
               CardDetails(
-                title: 'rd_return'.tr,
+                title: 'record_return'.tr,
                 child: RecordDetailsTraces(
                   trace: controller.record.traces.returned!,
                 ),

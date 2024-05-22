@@ -18,7 +18,7 @@ class RegisterPage extends GetView<RegisterController> {
     try {
       await controller.onWatch();
     } on Exception catch (e) {
-      showSnackbarErrorTo('r_sset_watch'.tr, e);
+      showSnackbarErrorTo('rp_sset_watch'.tr, e);
     }
   }
 
@@ -26,7 +26,7 @@ class RegisterPage extends GetView<RegisterController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('r_register'.tr),
+        title: Text('rp_title'.tr),
         actions: [
           Obx(
             () => IconButton(
@@ -53,7 +53,7 @@ class RegisterPage extends GetView<RegisterController> {
         () {
           if (controller.records.isEmpty) {
             return Center(
-              child: Text('r_empty'.tr),
+              child: Text('rp_empty'.tr),
             );
           } else {
             return ListView.separated(
@@ -103,7 +103,7 @@ class RegisterPage extends GetView<RegisterController> {
                   children: [
                     BottomSheetButton.icon(
                       icon: const Icon(Icons.edit),
-                      label: Text('r_edit'.tr),
+                      label: Text('rp_edit'.tr),
                       onPressed: controller.actionInProgress
                           ? null
                           : () => controller.onUpdateDraft(record),
@@ -113,8 +113,8 @@ class RegisterPage extends GetView<RegisterController> {
                           ? const Icon(Icons.done)
                           : const IconProgress(),
                       label: controller.submitInProgress.isFalse
-                          ? Text('r_submit'.tr)
-                          : Text('r_submit_progress'.tr),
+                          ? Text('rp_submit'.tr)
+                          : Text('rp_submit_progress'.tr),
                       onPressed: controller.actionInProgress
                           ? null
                           : () async {
@@ -122,7 +122,7 @@ class RegisterPage extends GetView<RegisterController> {
                                 await controller.onSubmitDraft(record);
                                 controller.onGoBack();
                               } on Exception catch (e) {
-                                showSnackbarErrorTo('r_sset_submit'.tr, e);
+                                showSnackbarErrorTo('rp_sset_submit'.tr, e);
                               }
                             },
                     ),
@@ -134,8 +134,8 @@ class RegisterPage extends GetView<RegisterController> {
                               color: Colors.red,
                             ),
                       label: controller.deleteInProgress.isFalse
-                          ? Text('r_delete'.tr)
-                          : Text('r_delete_progress'.tr),
+                          ? Text('rp_delete'.tr)
+                          : Text('rp_delete_progress'.tr),
                       onPressed: controller.actionInProgress
                           ? null
                           : () async {
@@ -143,7 +143,7 @@ class RegisterPage extends GetView<RegisterController> {
                                 await controller.onDeleteDraft(record);
                                 controller.onGoBack();
                               } on Exception catch (e) {
-                                showSnackbarErrorTo('r_sset_delete'.tr, e);
+                                showSnackbarErrorTo('rp_sset_delete'.tr, e);
                               }
                             },
                       color: Colors.red,
@@ -153,7 +153,7 @@ class RegisterPage extends GetView<RegisterController> {
                       child: ElevatedButton.icon(
                         onPressed: controller.onCancel,
                         icon: const Icon(Icons.cancel),
-                        label: Text('r_cancel'.tr),
+                        label: Text('rp_cancel'.tr),
                       ),
                     )
                   ],

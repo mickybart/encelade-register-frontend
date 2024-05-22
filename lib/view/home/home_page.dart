@@ -16,17 +16,17 @@ class HomePage extends GetView<HomeController> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'home_welcome'.tr,
+              'hp_welcome'.tr,
               style: const TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
             ),
-            Text('home_welcome_description'.tr),
+            Text('hp_welcome_description'.tr),
             const SizedBox(
               height: 24.0,
             ),
             SubPageSection(
               icon: const Icon(Icons.dataset),
-              label: Text('home_register'.tr),
-              description: Text('home_register_description'.tr),
+              label: Text('hp_register'.tr),
+              description: Text('hp_register_description'.tr),
               onPressed: controller.onRegister,
             ),
             const Spacer(),

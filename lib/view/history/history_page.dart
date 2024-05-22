@@ -16,7 +16,7 @@ class HistoryPage extends GetView<HistoryController> {
     try {
       await controller.onRefresh();
     } on Exception catch (e) {
-      showSnackbarErrorTo('hp_sset_refresh'.tr, e);
+      showSnackbarErrorTo('hpp_sset_refresh'.tr, e);
     }
   }
 
@@ -24,7 +24,7 @@ class HistoryPage extends GetView<HistoryController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('hp_title'.tr),
+        title: Text('hpp_title'.tr),
         actions: [
           Obx(
             () => IconButton(
@@ -62,7 +62,7 @@ class HistoryPage extends GetView<HistoryController> {
                 children: [
                   if (controller.stateCompleted.value)
                     Chip(
-                      label: Text('hp_completed'.tr),
+                      label: Text('hpp_completed'.tr),
                       avatar: const Icon(
                         Icons.verified,
                         color: Colors.green,
@@ -70,7 +70,7 @@ class HistoryPage extends GetView<HistoryController> {
                     ),
                   if (controller.stateDraft.value)
                     Chip(
-                      label: Text('hp_draft'.tr),
+                      label: Text('hpp_draft'.tr),
                       avatar: const Icon(
                         Icons.drafts,
                         color: Colors.purple,
@@ -78,7 +78,7 @@ class HistoryPage extends GetView<HistoryController> {
                     ),
                   if (controller.stateOthers.value)
                     Chip(
-                      label: Text('hp_other'.tr),
+                      label: Text('hpp_other'.tr),
                       avatar: const Icon(
                         Icons.more_horiz,
                         color: Colors.grey,
@@ -93,7 +93,7 @@ class HistoryPage extends GetView<HistoryController> {
               () {
                 if (controller.records.isEmpty) {
                   return Center(
-                    child: Text('hp_empty'.tr),
+                    child: Text('hpp_empty'.tr),
                   );
                 } else {
                   return ListView.separated(
@@ -122,7 +122,7 @@ class HistoryPage extends GetView<HistoryController> {
     final dateFormat = GetDateFormat.yMMMMd();
 
     if (controller.range.length != 2) {
-      return 'hp_select_filter'.tr;
+      return 'hpp_select_filter'.tr;
     }
 
     final startDate = dateFormat.format(controller.range[0]);
@@ -135,10 +135,10 @@ class HistoryPage extends GetView<HistoryController> {
     final dateFormat = GetDateFormat.yMMMMd();
     final startDate = controller.settingsRange.isNotEmpty
         ? dateFormat.format(controller.settingsRange[0])
-        : 'hp_start_date'.tr;
+        : 'hpp_start_date'.tr;
     final endDate = controller.settingsRange.length == 2
         ? dateFormat.format(controller.settingsRange[1])
-        : 'hp_end_date'.tr;
+        : 'hpp_end_date'.tr;
 
     return '$startDate - $endDate';
   }
@@ -181,21 +181,21 @@ class HistoryPage extends GetView<HistoryController> {
                 onChanged: (value) {
                   controller.settingsStateCompleted(value);
                 },
-                title: Text('hp_show_completed'.tr),
+                title: Text('hpp_show_completed'.tr),
               ),
               SwitchListTile(
                 value: controller.settingsStateDraft.value,
                 onChanged: (value) {
                   controller.settingsStateDraft(value);
                 },
-                title: Text('hp_show_draft'.tr),
+                title: Text('hpp_show_draft'.tr),
               ),
               SwitchListTile(
                 value: controller.settingsStateOthers.value,
                 onChanged: (value) {
                   controller.settingsStateOthers(value);
                 },
-                title: Text('hp_show_other'.tr),
+                title: Text('hpp_show_other'.tr),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
@@ -205,7 +205,7 @@ class HistoryPage extends GetView<HistoryController> {
                     ElevatedButton.icon(
                       onPressed: controller.onCancel,
                       icon: const Icon(Icons.cancel),
-                      label: Text('hp_cancel'.tr),
+                      label: Text('hpp_cancel'.tr),
                     ),
                     ElevatedButton.icon(
                       onPressed: controller.isSettingsValid
@@ -216,7 +216,7 @@ class HistoryPage extends GetView<HistoryController> {
                             }
                           : null,
                       icon: const Icon(Icons.filter_list),
-                      label: Text('hp_apply'.tr),
+                      label: Text('hpp_apply'.tr),
                     ),
                   ],
                 ),

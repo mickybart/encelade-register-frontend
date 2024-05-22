@@ -11,20 +11,20 @@ class NewDraftPage extends GetView<NewDraftController> {
     return ScaffoldRecordFlow(
       controller: controller,
       appBar: AppBar(
-        title: Text('nd_title'.tr),
+        title: Text('ndp_title'.tr),
       ),
       primaryAction: RecordFlowAction(
-        'nd_create'.tr,
-        'nd_create_progress'.tr,
+        'ndp_create'.tr,
+        'ndp_create_progress'.tr,
         Icons.add,
-        'nd_sset_create'.tr,
+        'ndp_sset_create'.tr,
         controller.onCreateDraft,
       ),
       children: [
         TextField(
           controller: controller.summaryController,
           decoration: InputDecoration(
-            labelText: 'nd_summary'.tr,
+            labelText: 'ndp_summary'.tr,
           ),
           minLines: 10,
           maxLines: 10,

@@ -25,7 +25,7 @@ class RecordDetailsState extends StatelessWidget {
         ),
         if (state == RecordState.collectPqrsSignature) ...[
           const SizedBox(width: 8.0),
-          Text('rs_signed_pqrs_alt'.tr, style: const TextStyle(color: Colors.blue)),
+          Text('state_signed_pqrs_alt'.tr, style: const TextStyle(color: Colors.blue)),
         ],
       ],
     );

@@ -18,10 +18,10 @@ class InsideOutsidePage extends GetView<InsideOutsideController> {
       ),
       spacer: false,
       primaryAction: RecordFlowAction(
-        'io_set'.tr,
-        'io_set_progress'.tr,
+        'iop_set'.tr,
+        'iop_set_progress'.tr,
         Icons.today,
-        'io_sset_timestamp'.tr,
+        'iop_sset_timestamp'.tr,
         controller.onSetIt,
       ),
       children: [

@@ -12,7 +12,7 @@ class PdfPreviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('pp_title'.tr),
+        title: Text('ppp_title'.tr),
         actions: [
           IconButton(
             onPressed: controller.onSharePdf,
