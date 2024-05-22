@@ -1,5 +1,6 @@
 import 'package:encelade/controller/interfaces/i_pdf_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:printing/printing.dart';
 
 class PdfPreviewPage extends StatelessWidget {
@@ -11,7 +12,7 @@ class PdfPreviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pdf Preview'),
+        title: Text('pp_title'.tr),
         actions: [
           IconButton(
             onPressed: controller.onSharePdf,

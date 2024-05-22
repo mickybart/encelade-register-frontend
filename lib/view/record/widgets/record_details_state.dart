@@ -1,6 +1,7 @@
 import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/view/record/styles/record_style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RecordDetailsState extends StatelessWidget {
   final RecordState state;
@@ -24,7 +25,7 @@ class RecordDetailsState extends StatelessWidget {
         ),
         if (state == RecordState.collectPqrsSignature) ...[
           const SizedBox(width: 8.0),
-          const Text('*Signed by PQRS', style: TextStyle(color: Colors.blue)),
+          Text('rs_signed_pqrs_alt'.tr, style: const TextStyle(color: Colors.blue)),
         ],
       ],
     );

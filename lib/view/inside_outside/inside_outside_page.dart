@@ -1,15 +1,15 @@
 import 'package:encelade/controller/record_flow/inside_outside.dart';
+import 'package:encelade/translations/get_date_format.dart';
 import 'package:encelade/view/common/widgets/scadfold_record_flow.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class InsideOutsidePage extends GetView<InsideOutsideController> {
   const InsideOutsidePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat.jm();
+    final dateFormat = GetDateFormat.jm();
 
     return ScaffoldRecordFlow(
       controller: controller,
@@ -18,10 +18,10 @@ class InsideOutsidePage extends GetView<InsideOutsideController> {
       ),
       spacer: false,
       primaryAction: RecordFlowAction(
-        'set it',
-        'setting it...',
+        'io_set'.tr,
+        'io_set_progress'.tr,
         Icons.today,
-        'set the timestamp',
+        'io_sset_timestamp'.tr,
         controller.onSetIt,
       ),
       children: [

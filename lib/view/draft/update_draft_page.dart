@@ -11,21 +11,21 @@ class UpdateDraftPage extends GetView<UpdateDraftController> {
     return ScaffoldRecordFlow(
       controller: controller,
       appBar: AppBar(
-        title: const Text('Updating a draft record'),
+        title: Text('ud_title'.tr),
       ),
       primaryAction: RecordFlowAction(
-        'update',
-        'updating...',
+        'ud_update'.tr,
+        'ud_update_progress'.tr,
         Icons.edit,
-        'update the draft ${controller.id}',
+        'ud_sset_update'.trParams({'id': controller.id}),
         controller.onUpdateDraft,
       ),
       children: [
         Text(controller.id),
         TextField(
           controller: controller.summaryController,
-          decoration: const InputDecoration(
-            labelText: 'Summary',
+          decoration: InputDecoration(
+            labelText: 'ud_summary'.tr,
           ),
           minLines: 10,
           maxLines: 10,

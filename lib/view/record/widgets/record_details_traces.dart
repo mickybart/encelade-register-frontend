@@ -1,6 +1,7 @@
+import 'package:encelade/translations/get_date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 import '../../../model/types/traces.dart';
 
 class RecordDetailsTraces extends StatelessWidget {
@@ -10,13 +11,13 @@ class RecordDetailsTraces extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat.jm();
+    final dateFormat = GetDateFormat.jm();
 
     return Column(
       children: [
-        const Text(
-          'Client',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        Text(
+          'rd_client'.tr,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         Table(
           columnWidths: const <int, TableColumnWidth>{
@@ -26,18 +27,18 @@ class RecordDetailsTraces extends StatelessWidget {
           children: [
             TableRow(
               children: [
-                const Text('Inside at:'),
+                Text('rd_inside_at'.tr),
                 Text(trace.inside == null
                     ? '-'
                     : dateFormat.format(trace.inside!)),
               ],
             ),
             TableRow(children: [
-              const Text('Name:'),
+              Text('rd_name'.tr),
               Text(trace.client == null ? '-' : trace.client!.name),
             ]),
             TableRow(children: [
-              const Text('Signature:'),
+              Text('rd_signature'.tr),
               trace.client == null
                   ? const Text('-')
                   : SvgPicture.string(
@@ -48,7 +49,7 @@ class RecordDetailsTraces extends StatelessWidget {
                     ),
             ]),
             TableRow(children: [
-              const Text('Outside at:'),
+              Text('rd_outside_at'.tr),
               Text(trace.outside == null
                   ? '-'
                   : dateFormat.format(trace.outside!)),
@@ -58,9 +59,9 @@ class RecordDetailsTraces extends StatelessWidget {
         const SizedBox(
           height: 8.0,
         ),
-        const Text(
-          'PQRS',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        Text(
+          'rd_pqrs'.tr,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         Table(
           columnWidths: const <int, TableColumnWidth>{
@@ -69,11 +70,11 @@ class RecordDetailsTraces extends StatelessWidget {
           },
           children: [
             TableRow(children: [
-              const Text('Name:'),
+              Text('rd_name'.tr),
               Text(trace.pqrs == null ? '-' : trace.pqrs!.name),
             ]),
             TableRow(children: [
-              const Text('Signature:'),
+              Text('rd_signature'.tr),
               trace.pqrs == null
                   ? const Text('-')
                   : SvgPicture.string(

@@ -3,8 +3,11 @@ import 'package:get/get.dart';
 
 void showSnackbarErrorTo(String to, Exception e) {
   Get.snackbar(
-    'Error',
-    'Sorry, we are not able to $to due to the following error:\n\n$e',
+    'c_sset_error'.tr,
+    'c_sset_description'.trParams({
+      'to': to,
+      'e': e.toString(),
+    }),
     icon: const Icon(Icons.error),
     isDismissible: true,
     snackPosition: SnackPosition.BOTTOM,

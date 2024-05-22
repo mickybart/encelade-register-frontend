@@ -34,15 +34,15 @@ class InsideOutsideController extends IRecordController {
         /*
          * next step: client is inside office to collect or return products
          */
-        return 'Client inside office at ?';
+        return 'ioc_inside_title'.tr;
       case RecordState.collectClientSignature:
       case RecordState.returnClientSignature:
         /*
          * next step: client goes out of office after collected or returned products
          */
-        return 'Client outside office at ?';
+        return 'ioc_outside_title'.tr;
       default:
-        throw Exception('not allowed for this record state !');
+        throw Exception('ioc_not_allowd'.tr);
     }
   }
 
@@ -69,7 +69,7 @@ class InsideOutsideController extends IRecordController {
          */
         return await remoteRegisterProvider.returnClientOutside(record.id, time.value);
       default:
-        throw Exception('not allowed for this record state !');
+        throw Exception('ioc_not_allowd'.tr);
     }
   }
 

@@ -2,18 +2,19 @@ import 'dart:typed_data';
 
 import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/model/types/traces.dart';
+import 'package:encelade/translations/get_date_format.dart';
 import 'package:encelade/view/record/styles/record_style.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:encelade/model/types/record.dart';
 import 'package:printing/printing.dart';
 
 Future<Uint8List> saveHistoryPdf(PdfPageFormat? format, List<Record> records, List<DateTime> range) async {
-  final dateFormat = DateFormat.yMMMMd();
+  final dateFormat = GetDateFormat.yMMMMd();
   final startDate = dateFormat.format(range[0]);
   final endDate = dateFormat.format(range[1]);
-  final title = 'History: $startDate - $endDate';
+  final title = 'ph_title'.trParams({'s': startDate, 'e': endDate});
 
   final pdf = Document(title: title);
 
@@ -42,18 +43,18 @@ Future<Uint8List> saveHistoryPdf(PdfPageFormat? format, List<Record> records, Li
           children: [
             TableRow(
               children: [
-                Text('Created'),
-                Text('Summary'),
-                Text('Hours', style: const TextStyle(color: PdfColors.blue)),
-                Text('Client', style: const TextStyle(color: PdfColors.blue)),
-                Text('PQRS', style: const TextStyle(color: PdfColors.blue)),
-                Text('Hours',
+                Text('ph_created'.tr),
+                Text('ph_summary'.tr),
+                Text('ph_hours'.tr, style: const TextStyle(color: PdfColors.blue)),
+                Text('ph_client'.tr, style: const TextStyle(color: PdfColors.blue)),
+                Text('ph_pqrs'.tr, style: const TextStyle(color: PdfColors.blue)),
+                Text('ph_hours'.tr,
                     style: const TextStyle(color: PdfColors.lightGreen)),
-                Text('Client',
+                Text('ph_client'.tr,
                     style: const TextStyle(color: PdfColors.lightGreen)),
-                Text('PQRS',
+                Text('ph_pqrs'.tr,
                     style: const TextStyle(color: PdfColors.lightGreen)),
-                Text('State'),
+                Text('ph_state'.tr),
               ],
             ),
             ...recordsForPdf,
@@ -85,7 +86,7 @@ TableRow _record(Record record) {
     children: [
       // Creation date
       Text(record.created != null
-          ? DateFormat.yMMMMd().format(record.created!)
+          ? GetDateFormat.yMMMMd().format(record.created!)
           : '-'),
       // Summary
       Text(record.summary),
@@ -137,7 +138,7 @@ Widget _insideOutside(Trace? trace) {
     return Text('-');
   }
 
-  final dateFormat = DateFormat.jm();
+  final dateFormat = GetDateFormat.jm();
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +158,7 @@ Widget _header(Context context, String title) {
               .defaultTextStyle
               .copyWith(color: PdfColors.grey)),
       Spacer(),
-      Text('CONFIDENTIAL',
+      Text('pdf_confidential'.tr,
           style: Theme.of(context)
               .defaultTextStyle
               .copyWith(color: PdfColors.red)),
@@ -169,7 +170,10 @@ Widget _footer(Context context) {
   return Container(
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.only(top: 1.0 * PdfPageFormat.cm),
-      child: Text('Page ${context.pageNumber} of ${context.pagesCount}',
+      child: Text('pdf_footer_page'.trParams({
+            'number': context.pageNumber.toString(),
+            'count': context.pagesCount.toString()
+          }),
           style: Theme.of(context)
               .defaultTextStyle
               .copyWith(color: PdfColors.grey)));

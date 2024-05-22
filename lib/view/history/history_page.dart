@@ -1,11 +1,11 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:encelade/controller/history.dart';
+import 'package:encelade/translations/get_date_format.dart';
 import 'package:encelade/view/common/snackbar.dart';
 import 'package:encelade/view/record/widgets/record_tile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class HistoryPage extends GetView<HistoryController> {
   HistoryPage({super.key}) {
@@ -16,7 +16,7 @@ class HistoryPage extends GetView<HistoryController> {
     try {
       await controller.onRefresh();
     } on Exception catch (e) {
-      showSnackbarErrorTo('refresh filter', e);
+      showSnackbarErrorTo('hp_sset_refresh'.tr, e);
     }
   }
 
@@ -24,7 +24,7 @@ class HistoryPage extends GetView<HistoryController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('History'),
+        title: Text('hp_title'.tr),
         actions: [
           Obx(
             () => IconButton(
@@ -61,25 +61,25 @@ class HistoryPage extends GetView<HistoryController> {
                 spacing: 8.0,
                 children: [
                   if (controller.stateCompleted.value)
-                    const Chip(
-                      label: Text('Completed'),
-                      avatar: Icon(
+                    Chip(
+                      label: Text('hp_completed'.tr),
+                      avatar: const Icon(
                         Icons.verified,
                         color: Colors.green,
                       ),
                     ),
                   if (controller.stateDraft.value)
-                    const Chip(
-                      label: Text('Draft'),
-                      avatar: Icon(
+                    Chip(
+                      label: Text('hp_draft'.tr),
+                      avatar: const Icon(
                         Icons.drafts,
                         color: Colors.purple,
                       ),
                     ),
                   if (controller.stateOthers.value)
-                    const Chip(
-                      label: Text('Others'),
-                      avatar: Icon(
+                    Chip(
+                      label: Text('hp_other'.tr),
+                      avatar: const Icon(
                         Icons.more_horiz,
                         color: Colors.grey,
                       ),
@@ -92,8 +92,8 @@ class HistoryPage extends GetView<HistoryController> {
             child: Obx(
               () {
                 if (controller.records.isEmpty) {
-                  return const Center(
-                    child: Text('No records...'),
+                  return Center(
+                    child: Text('hp_empty'.tr),
                   );
                 } else {
                   return ListView.separated(
@@ -119,10 +119,10 @@ class HistoryPage extends GetView<HistoryController> {
   }
 
   String _startEndDates() {
-    final dateFormat = DateFormat.yMMMMd();
+    final dateFormat = GetDateFormat.yMMMMd();
 
     if (controller.range.length != 2) {
-      return 'Please select a filter !';
+      return 'hp_select_filter'.tr;
     }
 
     final startDate = dateFormat.format(controller.range[0]);
@@ -132,13 +132,13 @@ class HistoryPage extends GetView<HistoryController> {
   }
 
   String _startEndDatesForSettings() {
-    final dateFormat = DateFormat.yMMMMd();
+    final dateFormat = GetDateFormat.yMMMMd();
     final startDate = controller.settingsRange.isNotEmpty
         ? dateFormat.format(controller.settingsRange[0])
-        : 'Start Date';
+        : 'hp_start_date'.tr;
     final endDate = controller.settingsRange.length == 2
         ? dateFormat.format(controller.settingsRange[1])
-        : 'End Date';
+        : 'hp_end_date'.tr;
 
     return '$startDate - $endDate';
   }
@@ -181,21 +181,21 @@ class HistoryPage extends GetView<HistoryController> {
                 onChanged: (value) {
                   controller.settingsStateCompleted(value);
                 },
-                title: const Text('Show completed records'),
+                title: Text('hp_show_completed'.tr),
               ),
               SwitchListTile(
                 value: controller.settingsStateDraft.value,
                 onChanged: (value) {
                   controller.settingsStateDraft(value);
                 },
-                title: const Text('Show draft records'),
+                title: Text('hp_show_draft'.tr),
               ),
               SwitchListTile(
                 value: controller.settingsStateOthers.value,
                 onChanged: (value) {
                   controller.settingsStateOthers(value);
                 },
-                title: const Text('Show all others records'),
+                title: Text('hp_show_other'.tr),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
@@ -205,7 +205,7 @@ class HistoryPage extends GetView<HistoryController> {
                     ElevatedButton.icon(
                       onPressed: controller.onCancel,
                       icon: const Icon(Icons.cancel),
-                      label: const Text('cancel'),
+                      label: Text('hp_cancel'.tr),
                     ),
                     ElevatedButton.icon(
                       onPressed: controller.isSettingsValid
@@ -216,7 +216,7 @@ class HistoryPage extends GetView<HistoryController> {
                             }
                           : null,
                       icon: const Icon(Icons.filter_list),
-                      label: const Text('apply'),
+                      label: Text('hp_apply'.tr),
                     ),
                   ],
                 ),

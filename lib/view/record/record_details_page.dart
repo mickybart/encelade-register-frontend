@@ -1,10 +1,10 @@
 import 'package:encelade/controller/record_details.dart';
+import 'package:encelade/translations/get_date_format.dart';
 import 'package:encelade/view/record/widgets/record_details_state.dart';
 import 'package:encelade/view/record/widgets/record_details_traces.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class RecordDetailsPage extends GetView<RecordDetailsController> {
   const RecordDetailsPage({super.key});
@@ -13,7 +13,7 @@ class RecordDetailsPage extends GetView<RecordDetailsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Details'),
+        title: Text('rd_title'.tr),
         actions: [
           IconButton(
             onPressed: controller.pdf.onSharePdf,
@@ -37,26 +37,26 @@ class RecordDetailsPage extends GetView<RecordDetailsController> {
           children: [
             Text(controller.id),
             CardDetails(
-              title: 'State',
+              title: 'rd_state'.tr,
               child: RecordDetailsState(state: controller.record.state),
             ),
             CardDetails(
-                title: 'Summary', child: Text(controller.record.summary)),
+                title: 'rd_summary'.tr, child: Text(controller.record.summary)),
             if (controller.record.created != null)
               CardDetails(
-                  title: 'Creation date',
+                  title: 'rd_creation_date'.tr,
                   child: Text(
-                      DateFormat.yMMMMd().format(controller.record.created!))),
+                      GetDateFormat.yMMMMd().format(controller.record.created!))),
             if (controller.record.traces.collected != null)
               CardDetails(
-                title: 'Collect',
+                title: 'rd_collect'.tr,
                 child: RecordDetailsTraces(
                   trace: controller.record.traces.collected!,
                 ),
               ),
             if (controller.record.traces.returned != null)
               CardDetails(
-                title: 'Return',
+                title: 'rd_return'.tr,
                 child: RecordDetailsTraces(
                   trace: controller.record.traces.returned!,
                 ),

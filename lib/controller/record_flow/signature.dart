@@ -4,6 +4,7 @@ import 'package:archive/archive_io.dart';
 import 'package:encelade/controller/interfaces/i_record_controller.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:signature/signature.dart' as sign;
 
 class SignatureController extends IRecordController {
@@ -30,15 +31,15 @@ class SignatureController extends IRecordController {
         /*
          * next step: client is ready to sign.
          */
-        return 'Client signature';
+        return 'sc_client_signature'.tr;
       case RecordState.collectClientOutside:
       case RecordState.returnClientOutside:
         /*
          * next step: pqrs is ready to sign.
          */
-        return 'PQRS signature';
+        return 'sc_pqrs_signature'.tr;
       default:
-        throw Exception('not allowed for this record state !');
+        throw Exception('sc_not_allowed'.tr);
     }
   }
 
@@ -49,15 +50,15 @@ class SignatureController extends IRecordController {
         /*
          * next step: client is ready to sign.
          */
-        return 'client name';
+        return 'sc_client_name'.tr;
       case RecordState.collectClientOutside:
       case RecordState.returnClientOutside:
         /*
          * next step: pqrs is ready to sign.
          */
-        return 'PQRS name';
+        return 'sc_pqrs_name'.tr;
       default:
-        throw Exception('not allowed for this record state !');
+        throw Exception('sc_not_allowed'.tr);
     }
   }
 
@@ -66,12 +67,12 @@ class SignatureController extends IRecordController {
 
   Future<void> _onSign() async {
     final svg = _signature.toRawSVG();
-    if (svg == null) throw Exception('The signature is empty !');
+    if (svg == null) throw Exception('sc_svg_error'.tr);
 
     final gzipSvg = GZipEncoder().encode(
       utf8.encode(svg),
     );
-    if (gzipSvg == null) throw Exception('Gzip of the signature is empty !');
+    if (gzipSvg == null) throw Exception('sc_gzip_error'.tr);
 
     final signature = base64.encode(
       gzipSvg,
@@ -115,7 +116,7 @@ class SignatureController extends IRecordController {
           signature,
         );
       default:
-        throw Exception('not allowed for this record state !');
+        throw Exception('sc_not_allowed'.tr);
     }
   }
 

@@ -65,7 +65,7 @@ class ScaffoldRecordFlow extends StatelessWidget {
                     ElevatedButton.icon(
                       onPressed: controller.onCancel,
                       icon: const Icon(Icons.cancel),
-                      label: const Text('Cancel'),
+                      label: Text('srf_cancel'.tr),
                     ),
                     ElevatedButton.icon(
                       onPressed: controller.validity.isFalse ||

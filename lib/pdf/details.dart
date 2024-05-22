@@ -3,13 +3,15 @@ import 'dart:typed_data';
 import 'package:encelade/model/types/record.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/model/types/traces.dart';
+import 'package:encelade/translations/get_date_format.dart';
 import 'package:encelade/view/record/styles/record_style.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 
-Future<Uint8List> saveRecordDetailsPdf(PdfPageFormat? format, Record record) async {
+Future<Uint8List> saveRecordDetailsPdf(
+    PdfPageFormat? format, Record record) async {
   final pdf = Document(title: record.id);
 
   pdf.addPage(
@@ -26,26 +28,26 @@ Future<Uint8List> saveRecordDetailsPdf(PdfPageFormat? format, Record record) asy
       footer: (context) => _footer(context),
       build: (context) => [
         ..._sectionDetails(
-          'State',
+          'rd_state'.tr,
           _recordDetailsState(record.state),
         ),
         ..._sectionDetails(
-          'Summary',
+          'rd_summary'.tr,
           Paragraph(text: record.summary),
         ),
         if (record.created != null)
           ..._sectionDetails(
-            'Creation date',
-            Paragraph(text: DateFormat.yMMMMd().format(record.created!)),
+            'rd_creation_date'.tr,
+            Paragraph(text: GetDateFormat.yMMMMd().format(record.created!)),
           ),
         if (record.traces.collected != null)
           ..._sectionDetails(
-            'Collect',
+            'rd_collect'.tr,
             _recordDetailsTraces(record.traces.collected!),
           ),
         if (record.traces.returned != null)
           ..._sectionDetails(
-            'Return',
+            'rd_return'.tr,
             _recordDetailsTraces(record.traces.returned!),
           ),
       ],
@@ -72,18 +74,18 @@ Widget _recordDetailsState(RecordState state) {
     Text(recordFriendlyState, style: TextStyle(color: recordColor)),
     if (state == RecordState.collectPqrsSignature) ...[
       SizedBox(width: 8.0),
-      Text('*Signed by PQRS', style: const TextStyle(color: PdfColors.blue)),
+      Text('rs_signed_pqrs_alt'.tr, style: const TextStyle(color: PdfColors.blue)),
     ],
   ]);
 }
 
 Widget _recordDetailsTraces(Trace trace) {
-  final dateFormat = DateFormat.jm();
+  final dateFormat = GetDateFormat.jm();
 
   return Column(
     children: [
       Text(
-        'Client',
+        'rd_client'.tr,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       Table(
@@ -94,18 +96,18 @@ Widget _recordDetailsTraces(Trace trace) {
         children: [
           TableRow(
             children: [
-              Text('Inside at:'),
+              Text('rd_inside_at'.tr),
               Text(trace.inside == null
                   ? '-'
                   : dateFormat.format(trace.inside!)),
             ],
           ),
           TableRow(children: [
-            Text('Name:'),
+            Text('rd_name'.tr),
             Text(trace.client == null ? '-' : trace.client!.name),
           ]),
           TableRow(children: [
-            Text('Signature:'),
+            Text('rd_signature'.tr),
             trace.client == null
                 ? Text('-')
                 : SvgImage(
@@ -116,7 +118,7 @@ Widget _recordDetailsTraces(Trace trace) {
                   ),
           ]),
           TableRow(children: [
-            Text('Outside at:'),
+            Text('rd_outside_at'.tr),
             Text(trace.outside == null
                 ? '-'
                 : dateFormat.format(trace.outside!)),
@@ -125,7 +127,7 @@ Widget _recordDetailsTraces(Trace trace) {
       ),
       SizedBox(height: 8.0),
       Text(
-        'PQRS',
+        'rd_pqrs'.tr,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       Table(
@@ -135,11 +137,11 @@ Widget _recordDetailsTraces(Trace trace) {
         },
         children: [
           TableRow(children: [
-            Text('Name:'),
+            Text('rd_name'.tr),
             Text(trace.pqrs == null ? '-' : trace.pqrs!.name),
           ]),
           TableRow(children: [
-            Text('Signature:'),
+            Text('rd_signature'.tr),
             trace.pqrs == null
                 ? Text('-')
                 : SvgImage(
@@ -164,7 +166,7 @@ Widget _header(Context context, String title) {
               .defaultTextStyle
               .copyWith(color: PdfColors.grey)),
       Spacer(),
-      Text('CONFIDENTIAL',
+      Text('pdf_confidential'.tr,
           style: Theme.of(context)
               .defaultTextStyle
               .copyWith(color: PdfColors.red)),
@@ -176,7 +178,11 @@ Widget _footer(Context context) {
   return Container(
       alignment: Alignment.centerRight,
       margin: const EdgeInsets.only(top: 1.0 * PdfPageFormat.cm),
-      child: Text('Page ${context.pageNumber} of ${context.pagesCount}',
+      child: Text(
+          'pdf_footer_page'.trParams({
+            'number': context.pageNumber.toString(),
+            'count': context.pagesCount.toString()
+          }),
           style: Theme.of(context)
               .defaultTextStyle
               .copyWith(color: PdfColors.grey)));

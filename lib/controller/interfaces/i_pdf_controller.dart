@@ -41,7 +41,7 @@ abstract class IPdfController extends GetxController {
         filename: filename,
       );
       if (!result) {
-        throw Exception('An issue occured during sharing !');
+        throw Exception('ipc_share_error'.tr);
       }
     } finally {
       shareInProgress(false);

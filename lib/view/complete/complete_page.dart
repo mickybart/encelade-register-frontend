@@ -11,13 +11,13 @@ class CompletePage extends GetView<CompleteController> {
     return ScaffoldRecordFlow(
       controller: controller,
       appBar: AppBar(
-        title: const Text('Last verifications'),
+        title: Text('c_title'.tr),
       ),
       primaryAction: RecordFlowAction(
-        'verified and conform',
-        'completing...',
+        'c_verified'.tr,
+        'c_verified_progress'.tr,
         Icons.verified,
-        'complete',
+        'c_sset_verified'.tr,
         controller.onComplete,
       ),
       spacer: false,
