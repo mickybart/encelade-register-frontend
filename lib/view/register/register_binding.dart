@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 class RegisterBinding extends Bindings {
   @override
   void dependencies() {
+    Get.put(RemoteRegisterProvider());
     Get.put<RegisterController>(
       RegisterController(
         Get.find<RemoteRegisterProvider>(),

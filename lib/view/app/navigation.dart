@@ -1,4 +1,5 @@
 abstract class Routes {
+  static const String home = '/';
   static const String register = '/register';
   static const String newDraft = '/register/record/flow/new';
   static const String updateDraft = '/register/record/flow/update';
