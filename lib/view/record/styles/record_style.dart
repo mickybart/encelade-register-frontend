@@ -13,7 +13,7 @@ import 'package:pdf/widgets.dart' as pw;
     case RecordState.created:
       return (Icons.shopping_cart, Colors.blue, 'state_created'.tr);
     case RecordState.collectClientInside:
-      return (Icons.shopping_cart_checkout, Colors.blue, 'state_inside'.tr);
+      return (Icons.point_of_sale, Colors.blue, 'state_inside'.tr);
     case RecordState.collectClientSignature:
       return (Icons.draw, Colors.blue, 'state_signed_client'.tr);
     case RecordState.collectClientOutside:
@@ -42,7 +42,7 @@ import 'package:pdf/widgets.dart' as pw;
     case RecordState.created:
       return (const pw.IconData(0xe8cc), PdfColors.blue, 'state_created'.tr);
     case RecordState.collectClientInside:
-      return (const pw.IconData(0xeb88), PdfColors.blue, 'state_inside'.tr);
+      return (const pw.IconData(0xf17e), PdfColors.blue, 'state_inside'.tr);
     case RecordState.collectClientSignature:
       return (const pw.IconData(0xe746), PdfColors.blue, 'state_signed_client'.tr);
     case RecordState.collectClientOutside:
