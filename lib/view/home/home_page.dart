@@ -36,12 +36,12 @@ class HomePage extends GetView<HomeController> {
                   value: controller.language,
                   items: const [
                     DropdownMenuItem(
-                      value: Language.english,
-                      child: Text('English'),
+                      value: Language.enCa,
+                      child: Text('English (Canadian)'),
                     ),
                     DropdownMenuItem(
-                      value: Language.french,
-                      child: Text('Français'),
+                      value: Language.frCa,
+                      child: Text('Français (Canadien)'),
                     )
                   ],
                   autofocus: false,

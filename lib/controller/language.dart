@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 enum Language {
-  english,
-  french,
+  enCa,
+  frCa,
 }
 
 class LanguageController extends GetxController {
-  final language = Rx<Language>(Language.english);
+  final language = Rx<Language>(Language.enCa);
 
   // static Future<LanguageController> build() async {
   //   await initializeDateFormatting();
@@ -24,13 +24,13 @@ class LanguageController extends GetxController {
   }
 
   void onLanguageChange(Language? value) async {
-    language.value = value ?? Language.english;
+    language.value = value ?? Language.enCa;
 
     switch (language.value) {
-      case Language.english:
+      case Language.enCa:
         await Get.updateLocale(const Locale('en', 'CA'));
         break;
-      case Language.french:
+      case Language.frCa:
         await Get.updateLocale(const Locale('fr', 'CA'));
         break;
     }
