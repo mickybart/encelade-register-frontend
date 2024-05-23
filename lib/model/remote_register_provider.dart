@@ -1,5 +1,3 @@
-import 'dart:io'; // unsupported for web
-
 import 'package:encelade/model/proto/google/protobuf/empty.pb.dart' as protog_e;
 import 'package:encelade/model/proto/register.pbgrpc.dart' as proto;
 import 'package:encelade/model/types/event_type.dart';
@@ -7,6 +5,7 @@ import 'package:encelade/model/types/record.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/model/types/record_event.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:grpc/grpc_or_grpcweb.dart';
 
 import 'utils.dart';
@@ -31,10 +30,11 @@ class RemoteRegisterProvider {
     String host = '127.0.0.1';
     int port = 50051;
 
-    if (kIsWeb) {
+    if (GetPlatform.isWeb) {
       port = 50052;
     } else {
-      if (Platform.isAndroid) {
+      if (GetPlatform.isAndroid && kDebugMode) {
+        // Android Emulator
         host = '10.0.2.2';
       }
     }

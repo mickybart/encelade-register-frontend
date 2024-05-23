@@ -3,7 +3,6 @@ import 'package:encelade/controller/history.dart';
 import 'package:encelade/translations/get_date_format.dart';
 import 'package:encelade/view/common/snackbar.dart';
 import 'package:encelade/view/record/widgets/record_tile.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,12 +42,11 @@ class HistoryPage extends GetView<HistoryController> {
             icon: const Icon(Icons.print),
             tooltip: 'tooltip_print'.tr,
           ),
-          if (kDebugMode)
-            IconButton(
-              onPressed: controller.pdf.onPdfPreview,
-              icon: const Icon(Icons.picture_as_pdf),
-              tooltip: 'tooltip_pdf'.tr,
-            ),
+          IconButton(
+            onPressed: controller.pdf.onPdfPreview,
+            icon: const Icon(Icons.picture_as_pdf),
+            tooltip: 'tooltip_pdf'.tr,
+          ),
         ],
       ),
       body: Column(

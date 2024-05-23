@@ -2,7 +2,6 @@ import 'package:encelade/controller/record_details.dart';
 import 'package:encelade/translations/get_date_format.dart';
 import 'package:encelade/view/record/widgets/record_details_state.dart';
 import 'package:encelade/view/record/widgets/record_details_traces.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,12 +24,11 @@ class RecordDetailsPage extends GetView<RecordDetailsController> {
             icon: const Icon(Icons.print),
             tooltip: 'tooltip_print'.tr,
           ),
-          if (kDebugMode)
-            IconButton(
-              onPressed: controller.pdf.onPdfPreview,
-              icon: const Icon(Icons.picture_as_pdf),
-              tooltip: 'tooltip_pdf'.tr,
-            ),
+          IconButton(
+            onPressed: controller.pdf.onPdfPreview,
+            icon: const Icon(Icons.picture_as_pdf),
+            tooltip: 'tooltip_pdf'.tr,
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -44,12 +42,13 @@ class RecordDetailsPage extends GetView<RecordDetailsController> {
               child: RecordDetailsState(state: controller.record.state),
             ),
             CardDetails(
-                title: 'record_summary'.tr, child: Text(controller.record.summary)),
+                title: 'record_summary'.tr,
+                child: Text(controller.record.summary)),
             if (controller.record.created != null)
               CardDetails(
                   title: 'record_creation_date'.tr,
-                  child: Text(
-                      GetDateFormat.yMMMMd().format(controller.record.created!))),
+                  child: Text(GetDateFormat.yMMMMd()
+                      .format(controller.record.created!))),
             if (controller.record.traces.collected != null)
               CardDetails(
                 title: 'record_collect'.tr,
