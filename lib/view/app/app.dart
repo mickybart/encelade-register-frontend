@@ -21,6 +21,7 @@ import 'package:encelade/view/record/record_details_page.dart';
 import 'package:encelade/view/signature/signature_binding.dart';
 import 'package:encelade/view/signature/signature_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
 class App extends StatelessWidget {
@@ -39,6 +40,14 @@ class App extends StatelessWidget {
       translations: Messages(),
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'CA'),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', 'CA'),
+        Locale('fr', 'CA'),
+      ],
       initialRoute: Routes.home,
       initialBinding: AppBinding(),
       getPages: [
