@@ -41,11 +41,15 @@ class RegisterPage extends GetView<RegisterController> {
                           color: Colors.red,
                         )
                       : const Icon(Icons.sync_disabled),
+              tooltip: controller.isSyncActive
+                  ? 'tooltip_sync_off'.tr
+                  : 'tooltip_sync_on'.tr,
             ),
           ),
           IconButton(
             onPressed: controller.onHistory,
             icon: const Icon(Icons.history),
+            tooltip: 'tooltip_history'.tr,
           ),
         ],
       ),
@@ -73,6 +77,7 @@ class RegisterPage extends GetView<RegisterController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: controller.onNewDraft,
+        tooltip: 'tooltip_new_draft'.tr,
         child: const Icon(Icons.add),
       ),
     );

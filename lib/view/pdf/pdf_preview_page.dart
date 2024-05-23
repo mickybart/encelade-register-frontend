@@ -17,10 +17,12 @@ class PdfPreviewPage extends StatelessWidget {
           IconButton(
             onPressed: controller.onSharePdf,
             icon: const Icon(Icons.share),
+            tooltip: 'tooltip_share_pdf'.tr,
           ),
           IconButton(
             onPressed: controller.onPrinting,
             icon: const Icon(Icons.print),
+            tooltip: 'tooltip_print'.tr,
           ),
         ],
       ),

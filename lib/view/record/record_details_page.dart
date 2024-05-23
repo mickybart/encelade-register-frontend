@@ -18,15 +18,18 @@ class RecordDetailsPage extends GetView<RecordDetailsController> {
           IconButton(
             onPressed: controller.pdf.onSharePdf,
             icon: const Icon(Icons.share),
+            tooltip: 'tooltip_share_pdf'.tr,
           ),
           IconButton(
             onPressed: controller.pdf.onPrinting,
             icon: const Icon(Icons.print),
+            tooltip: 'tooltip_print'.tr,
           ),
           if (kDebugMode)
             IconButton(
               onPressed: controller.pdf.onPdfPreview,
               icon: const Icon(Icons.picture_as_pdf),
+              tooltip: 'tooltip_pdf'.tr,
             ),
         ],
       ),

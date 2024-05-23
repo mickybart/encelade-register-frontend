@@ -30,20 +30,24 @@ class HistoryPage extends GetView<HistoryController> {
             () => IconButton(
               onPressed: controller.validity.value ? _onRefresh : null,
               icon: const Icon(Icons.refresh),
+              tooltip: 'tooltip_refresh'.tr,
             ),
           ),
           IconButton(
             onPressed: controller.pdf.onSharePdf,
             icon: const Icon(Icons.share),
+            tooltip: 'tooltip_share_pdf'.tr,
           ),
           IconButton(
             onPressed: controller.pdf.onPrinting,
             icon: const Icon(Icons.print),
+            tooltip: 'tooltip_print'.tr,
           ),
           if (kDebugMode)
             IconButton(
               onPressed: controller.pdf.onPdfPreview,
               icon: const Icon(Icons.picture_as_pdf),
+              tooltip: 'tooltip_pdf'.tr,
             ),
         ],
       ),
@@ -113,6 +117,7 @@ class HistoryPage extends GetView<HistoryController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _historySettings,
+        tooltip: 'tooltip_filter'.tr,
         child: const Icon(Icons.filter_list),
       ),
     );

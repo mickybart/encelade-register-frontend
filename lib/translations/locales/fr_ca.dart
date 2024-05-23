@@ -60,7 +60,7 @@ const Map<String, String> frCA = {
   'sgp_redo': 'Refaire',
   'sgp_clear': 'Réinitialiser',
   // PDF Preview page
-  'ppp_title': 'Pdf Visualisation',
+  'ppp_title': 'PDF Visualisation',
   // Inside Outside page
   'iop_set': 'enregistrer',
   'iop_set_progress': 'enregistrement...',
@@ -113,4 +113,15 @@ const Map<String, String> frCA = {
   'sc_pqrs_name': 'nom du PQRS',
   'sc_svg_error': 'La signature est vide !',
   'sc_gzip_error': 'La compression de la signature est vide !',
+  // tooltip
+  'tooltip_details': 'Détails',
+  'tooltip_new_draft': 'Nouveau brouillon',
+  'tooltip_sync_off': 'Désactiver la synchronisation',
+  'tooltip_sync_on': 'Activer la synchronisation',
+  'tooltip_history': 'Historique',
+  'tooltip_share_pdf': 'Partage en PDF',
+  'tooltip_print': 'Impression',
+  'tooltip_pdf': 'PDF Visualisation',
+  'tooltip_refresh': 'Rafraichir',
+  'tooltip_filter': 'Filtrer',
 };

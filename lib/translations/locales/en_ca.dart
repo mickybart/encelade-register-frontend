@@ -60,7 +60,7 @@ const Map<String, String> enCA = {
   'sgp_redo': 'Redo',
   'sgp_clear': 'Clear',
   // PDF Preview page
-  'ppp_title': 'Pdf Preview',
+  'ppp_title': 'PDF Preview',
   // Inside Outside page
   'iop_set': 'set it',
   'iop_set_progress': 'setting it...',
@@ -113,4 +113,15 @@ const Map<String, String> enCA = {
   'sc_pqrs_name': 'PQRS name',
   'sc_svg_error': 'The signature is empty !',
   'sc_gzip_error': 'Gzip of the signature is empty !',
+  // tooltip
+  'tooltip_details': 'Details',
+  'tooltip_new_draft': 'New draft',
+  'tooltip_sync_off': 'Disable sync',
+  'tooltip_sync_on': 'Enable sync',
+  'tooltip_history': 'History',
+  'tooltip_share_pdf': 'Share PDF',
+  'tooltip_print': 'Print',
+  'tooltip_pdf': 'PDF Preview',
+  'tooltip_refresh': 'Refresh',
+  'tooltip_filter': 'Filter',
 };

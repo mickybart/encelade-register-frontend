@@ -1,6 +1,7 @@
 import 'package:encelade/model/types/record.dart';
 import 'package:encelade/view/record/styles/record_style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RecordTile extends StatelessWidget {
   final Record record;
@@ -25,6 +26,7 @@ class RecordTile extends StatelessWidget {
           : IconButton(
               onPressed: () => onDetailsTap!(record),
               icon: const Icon(Icons.more_vert),
+              tooltip: 'tooltip_details'.tr,
             ),
       title: Text(record.id),
       subtitle: Column(
