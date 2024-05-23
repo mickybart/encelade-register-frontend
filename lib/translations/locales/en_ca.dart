@@ -18,7 +18,7 @@ const Map<String, String> enCA = {
   'record_name': 'Name:',
   'record_signature': 'Signature:',
   'record_outside_at': 'Outside at:',
-  'record_pqrs': 'PQRS',
+  'record_pqrs': 'RQ/RQS',
   // record states
   'state_draft': 'Draft',
   'state_created': 'Ready to collect',
@@ -26,8 +26,8 @@ const Map<String, String> enCA = {
   'state_signed_client': 'Signed by client',
   'state_outside': 'Outside office',
   'state_lab': 'Lab',
-  'state_signed_pqrs': 'Signed by PQRS',
-  'state_signed_pqrs_alt': '*Signed by PQRS',
+  'state_signed_pqrs': 'Signed by RQ/RQS',
+  'state_signed_pqrs_alt': '*Signed by RQ/RQS',
   'state_completed': 'Completed',
   'state_unspecified': 'Unspecified',
   // pdf
@@ -107,10 +107,10 @@ const Map<String, String> enCA = {
   'ioc_not_allowed': 'not allowed for this record state !',
   // Signature Controller
   'sc_client_signature': 'Client signature',
-  'sc_pqrs_signature': 'PQRS signature',
+  'sc_pqrs_signature': 'RQ/RQS signature',
   'sc_not_allowed': 'not allowed for this record state !',
   'sc_client_name': 'client name',
-  'sc_pqrs_name': 'PQRS name',
+  'sc_pqrs_name': 'RQ/RQS name',
   'sc_svg_error': 'The signature is empty !',
   'sc_gzip_error': 'Gzip of the signature is empty !',
   // tooltip

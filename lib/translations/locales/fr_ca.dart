@@ -18,7 +18,7 @@ const Map<String, String> frCA = {
   'record_name': 'Nom:',
   'record_signature': 'Signature:',
   'record_outside_at': 'Sortie à:',
-  'record_pqrs': 'PQRS',
+  'record_pqrs': 'RQ/RQS',
   // record states
   'state_draft': 'Brouillon',
   'state_created': 'Prêt pour ramassage',
@@ -26,8 +26,8 @@ const Map<String, String> frCA = {
   'state_signed_client': 'Signé par le client',
   'state_outside': '''À l'extérieur du bureau''',
   'state_lab': 'Lab',
-  'state_signed_pqrs': 'Signé par PQRS',
-  'state_signed_pqrs_alt': '*Signé par PQRS',
+  'state_signed_pqrs': 'Signé par RQ/RQS',
+  'state_signed_pqrs_alt': '*Signé par RQ/RQS',
   'state_completed': 'Complété',
   'state_unspecified': 'Inconnu',
   // pdf
@@ -107,10 +107,10 @@ const Map<String, String> frCA = {
   'ioc_not_allowed': '''non autorisé pour ce statut d'enregistrement !''',
   // Signature Controller
   'sc_client_signature': 'Signature du client',
-  'sc_pqrs_signature': 'Signature du PQRS',
+  'sc_pqrs_signature': 'Signature du RQ/RQS',
   'sc_not_allowed': '''non autorisé pour ce statut d'enregistrement !''',
   'sc_client_name': 'nom du client',
-  'sc_pqrs_name': 'nom du PQRS',
+  'sc_pqrs_name': 'nom du RQ/RQS',
   'sc_svg_error': 'La signature est vide !',
   'sc_gzip_error': 'La compression de la signature est vide !',
   // tooltip
