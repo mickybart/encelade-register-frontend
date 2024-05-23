@@ -1,5 +1,5 @@
 import 'package:encelade/controller/home.dart';
-import 'package:encelade/controller/language.dart';
+import 'package:encelade/services/language.dart';
 import 'package:encelade/view/home/widgets/sub_page_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

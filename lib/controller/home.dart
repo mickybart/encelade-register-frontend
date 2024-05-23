@@ -1,9 +1,9 @@
-import 'package:encelade/controller/language.dart';
+import 'package:encelade/services/language.dart';
 import 'package:encelade/view/app/navigation.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final LanguageController _lang;
+  final LanguageService _lang;
 
   HomeController(this._lang);
 

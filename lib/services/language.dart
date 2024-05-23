@@ -8,19 +8,12 @@ enum Language {
   frCa,
 }
 
-class LanguageController extends GetxController {
+class LanguageService extends GetxService {
   final language = Rx<Language>(Language.enCa);
 
-  // static Future<LanguageController> build() async {
-  //   await initializeDateFormatting();
-  //   return LanguageController();
-  // }
-
-  @override
-  void onInit() {
-    // must be await
-    initializeDateFormatting();
-    super.onInit();
+  static Future<LanguageService> build() async {
+    await initializeDateFormatting();
+    return LanguageService();
   }
 
   void onLanguageChange(Language? value) async {
