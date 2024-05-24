@@ -17,7 +17,8 @@ class HomePage extends GetView<HomeController> {
           children: [
             Text(
               'hp_welcome'.tr,
-              style: const TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+              style:
+                  const TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
             ),
             Text('hp_welcome_description'.tr),
             const SizedBox(
@@ -34,16 +35,14 @@ class HomePage extends GetView<HomeController> {
               child: Obx(
                 () => DropdownButton(
                   value: controller.language,
-                  items: const [
-                    DropdownMenuItem(
-                      value: Language.enCa,
-                      child: Text('English (Canadian)'),
-                    ),
-                    DropdownMenuItem(
-                      value: Language.frCa,
-                      child: Text('Français (Canadien)'),
-                    )
-                  ],
+                  items: LanguageService.supportedLangs.entries
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e.key,
+                          child: Text(e.value),
+                        ),
+                      )
+                      .toList(),
                   autofocus: false,
                   padding: const EdgeInsets.all(8.0),
                   onChanged: controller.onLanguageChange,

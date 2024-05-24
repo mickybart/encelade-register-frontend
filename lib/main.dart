@@ -1,4 +1,5 @@
 import 'package:encelade/services/language.dart';
+import 'package:encelade/services/storage.dart';
 import 'package:encelade/view/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,5 +10,6 @@ Future<void> main() async {
 }
 
 Future<void> initServices() async {
+  await Get.putAsync(() => StorageService.build());
   await Get.putAsync(() => LanguageService.build());
 }

@@ -1,5 +1,5 @@
+import 'package:encelade/services/language.dart';
 import 'package:encelade/translations/messages.dart';
-import 'package:encelade/view/app/app_binding.dart';
 import 'package:encelade/view/app/navigation.dart';
 import 'package:encelade/view/complete/complete_binding.dart';
 import 'package:encelade/view/complete/complete_page.dart';
@@ -38,19 +38,16 @@ class App extends StatelessWidget {
         useMaterial3: true,
       ),
       translations: Messages(),
-      locale: Get.deviceLocale,
-      fallbackLocale: const Locale('en', 'CA'),
+      //locale: Get.deviceLocale, // Set by LanguageService before running App
+      fallbackLocale: LanguageService.defaultLocale,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('en', 'CA'),
-        Locale('fr', 'CA'),
-      ],
+      supportedLocales: LanguageService.supportedLocales,
       initialRoute: Routes.home,
-      initialBinding: AppBinding(),
+      // initialBinding: AppBinding(),
       getPages: [
         GetPage(
           name: Routes.home,

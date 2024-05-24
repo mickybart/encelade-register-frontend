@@ -7,8 +7,8 @@ class HomeController extends GetxController {
 
   HomeController(this._lang);
 
-  Language get language => _lang.language.value;
-  Function(Language? value) get onLanguageChange => _lang.onLanguageChange;
+  String get language => _lang.language.value;
+  Function(String? value) get onLanguageChange => _lang.onLanguageChange;
 
   void onRegister() {
     Get.toNamed(Routes.register);
