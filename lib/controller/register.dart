@@ -154,7 +154,13 @@ class RegisterController extends GetxController {
       syncStatus.value = SyncStatus.syncOff;
     } on Exception {
       syncStatus.value = SyncStatus.syncError;
-      rethrow;
+
+      // Do not rethrow exception if the RemoteRegistryProvider is closed.
+      // RemoteRegistryProvider and RegisterController will be closed together (see RegisterBinding)
+      // That will avoid an unexpected Snackbar message in the UI when a user go back from RegisterPage
+      if (!_remoteRegisterProvider.isClosed) {
+        rethrow;
+      }
     }
   }
 
@@ -162,5 +168,11 @@ class RegisterController extends GetxController {
     if (syncStatus.value == SyncStatus.syncOn) {
       syncStatus.value = SyncStatus.syncOffRequested;
     }
+  }
+
+  @override
+  void onClose() {
+    onStopWatchRequest();
+    super.onClose();
   }
 }

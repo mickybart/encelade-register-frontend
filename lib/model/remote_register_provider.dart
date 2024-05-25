@@ -10,12 +10,18 @@ import 'package:grpc/grpc_or_grpcweb.dart';
 
 import 'utils.dart';
 
-class RemoteRegisterProvider {
+class RemoteRegisterProvider extends GetxController {
   proto.RegisterClient? _registerClient;
   late final GrpcOrGrpcWebClientChannel _channel;
 
   RemoteRegisterProvider() {
     _createChannel();
+  }
+
+  @override
+  void onClose() {
+    _channel.shutdown();
+    super.onClose();
   }
 
   proto.RegisterClient get registerClient {
@@ -39,18 +45,7 @@ class RemoteRegisterProvider {
       }
     }
 
-    // _channel = GrpcOrGrpcWebClientChannel.grpc(
-    //   host,
-    //   port: port,
-    //   options: const ChannelOptions(
-    //     credentials: ChannelCredentials.insecure(),
-    //   ),
-    // );
     _channel = GrpcOrGrpcWebClientChannel.toSingleEndpoint(host: host, port: port, transportSecure: false);
-  }
-
-  void dispose() async {
-    await _channel.shutdown();
   }
 
   Future<String> newDraft(String summary) async {
