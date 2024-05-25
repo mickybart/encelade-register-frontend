@@ -33,19 +33,23 @@ class RemoteRegisterProvider extends GetxController {
   }
 
   void _createChannel() {
-    String host = '127.0.0.1';
-    int port = 50051;
+    const hostCompilation = String.fromEnvironment('HOST', defaultValue: '');
+    const port = int.fromEnvironment('PORT', defaultValue: 50051);
+    const secure = bool.fromEnvironment('SECURE', defaultValue: false);
 
-    if (GetPlatform.isWeb) {
-      port = 50052;
-    } else {
-      if (GetPlatform.isAndroid && kDebugMode) {
+    String host = hostCompilation;
+    if (host.isEmpty) {
+      if (GetPlatform.isAndroid) {
         // Android Emulator
         host = '10.0.2.2';
+      } else {
+        // Local
+        host = '127.0.0.1';
       }
     }
 
-    _channel = GrpcOrGrpcWebClientChannel.toSingleEndpoint(host: host, port: port, transportSecure: false);
+    _channel = GrpcOrGrpcWebClientChannel.toSingleEndpoint(
+        host: host, port: port, transportSecure: secure);
   }
 
   Future<String> newDraft(String summary) async {
@@ -187,7 +191,8 @@ class RemoteRegisterProvider extends GetxController {
     }
   }
 
-  Stream<Record> getRecords(List<RecordState> states, List<DateTime> range) async* {
+  Stream<Record> getRecords(
+      List<RecordState> states, List<DateTime> range) async* {
     final request = proto.SearchRequest(
       states: states.map((e) => proto.RecordState.values[e.index]).toList(),
       range: proto.TimestampRange(
