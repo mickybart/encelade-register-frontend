@@ -4,9 +4,9 @@ import 'package:encelade/model/types/event_type.dart';
 import 'package:encelade/model/types/record.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/model/types/record_event.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:grpc/grpc_or_grpcweb.dart';
+import 'package:grpc/service_api.dart';
 
 import 'utils.dart';
 
@@ -27,7 +27,18 @@ class RemoteRegisterProvider extends GetxController {
   proto.RegisterClient get registerClient {
     if (_registerClient != null) return _registerClient!;
 
-    _registerClient = proto.RegisterClient(_channel);
+    // This code is for demonstration purpose only !
+    // The token must be provided by a safe mechanism like OIDC
+    const token = String.fromEnvironment('TOKEN', defaultValue: '');
+
+    _registerClient = proto.RegisterClient(
+      _channel,
+      interceptors: token.isEmpty
+          ? null
+          : [
+              AuthInterceptor(token),
+            ],
+    );
 
     return _registerClient!;
   }
@@ -35,7 +46,7 @@ class RemoteRegisterProvider extends GetxController {
   void _createChannel() {
     const hostCompilation = String.fromEnvironment('HOST', defaultValue: '');
     const port = int.fromEnvironment('PORT', defaultValue: 50051);
-    const secure = bool.fromEnvironment('SECURE', defaultValue: false);
+    const secure = bool.fromEnvironment('TLS', defaultValue: false);
 
     String host = hostCompilation;
     if (host.isEmpty) {
@@ -233,5 +244,34 @@ class RemoteRegisterProvider extends GetxController {
     await for (var event in response) {
       yield RecordEvent.fromProto(event);
     }
+  }
+}
+
+class AuthInterceptor extends ClientInterceptor {
+  static const authKey = 'apikey';
+  final String token;
+
+  AuthInterceptor(this.token);
+
+  @override
+  ResponseFuture<R> interceptUnary<Q, R>(ClientMethod<Q, R> method, Q request,
+      CallOptions options, ClientUnaryInvoker<Q, R> invoker) {
+    final withTokenOptions =
+        options.mergedWith(CallOptions(metadata: {authKey: token}));
+
+    return super.interceptUnary(method, request, withTokenOptions, invoker);
+  }
+
+  @override
+  ResponseStream<R> interceptStreaming<Q, R>(
+      ClientMethod<Q, R> method,
+      Stream<Q> requests,
+      CallOptions options,
+      ClientStreamingInvoker<Q, R> invoker) {
+    final withTokenOptions =
+        options.mergedWith(CallOptions(metadata: {authKey: token}));
+
+    return super
+        .interceptStreaming(method, requests, withTokenOptions, invoker);
   }
 }
