@@ -1,6 +1,6 @@
 # Encelade Suite
 
-Encelade Suite is a frontend to multiple services that can be used on some industry.
+![encelade illustration](docs/encelade.png) Encelade Suite is a frontend to several services designed to meet the specific needs of businesses.
 
 ## Components of the Suite
 ### Register
@@ -15,6 +15,12 @@ Frontend for a register that permit to:
 - Show history of records
 - export records as PDF
 
+The backend is provided by [encelade-register-backend](https://github.com/mickybart/encelade-register-backend).
+
+#### Demo
+
+running on GNU/Linux, Web and Android Emulator in the same time.
+
 ## Development
 
 ### Setup
@@ -28,8 +34,8 @@ dart pub global activate protoc_plugin
 
 export PATH="$PATH:$HOME/.pub-cache/bin"
 
-# proto file is part of encelade-register project.
-protoc -I ../encelade-register/proto/ ../encelade-register/proto/register.proto google/protobuf/timestamp.proto google/protobuf/empty.proto --dart_out=grpc:lib/model/proto
+# proto file is part of encelade-register-backend project. (checkout https://github.com/mickybart/encelade-register-backend)
+protoc -I ../encelade-register-backend/proto/ ../encelade-register-backend/proto/register.proto google/protobuf/timestamp.proto google/protobuf/empty.proto --dart_out=grpc:lib/model/proto
 ```
 
 ### Compilation / Packaging
@@ -43,7 +49,7 @@ You can use multiple variables during compilation time (`--dart-define=VARIABLE=
 | HOST     | Backend url | 127.0.0.1 or 10.0.2.2 (Android Emulator) |
 | PORT     | Backend port | 50051 |
 | TLS      | Enable backend tls | false |
-| TOKEN    | Provide a token for backend auth. This is UNSAFE and just here as a demonstration. Production code should rely on OIDC or alternative to get the token. | '' |
+| TOKEN    | Provide a token for backend auth. This is UNSAFE and just here as a demonstration. Production code should rely on OIDC or alternative to get the token. | NO TOKEN REQUIRED |
 
 #### Linux platform target
 
