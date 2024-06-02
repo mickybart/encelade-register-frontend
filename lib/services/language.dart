@@ -1,3 +1,10 @@
+// Service to manage languages
+//
+// Features:
+// - Switch between languages
+// - Expose languages supported
+// - Store last choice to restore it at next startup of the service
+
 import 'dart:ui';
 
 import 'package:encelade/services/storage.dart';

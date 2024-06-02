@@ -1,3 +1,5 @@
+// Generate a list of records content in PDF
+
 import 'dart:typed_data';
 
 import 'package:encelade/model/types/record_state.dart';

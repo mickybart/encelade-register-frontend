@@ -1,3 +1,13 @@
+// A Register page
+//
+// Used to display a list of record in progress and to interact with them
+//
+// Features supported:
+// - Create/update/Delete/submit a draft
+// - Follow products flow step by step
+// - Display details about a record
+// - Real time sync with the register
+
 import 'package:encelade/controller/register.dart';
 import 'package:encelade/model/types/record_state.dart';
 import 'package:encelade/view/common/widgets/icon_progress.dart';

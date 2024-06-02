@@ -1,3 +1,11 @@
+// A Signature page
+//
+// Used to provide the name and signature of a client or RQ/RQS
+//
+// Features supported:
+// - Name input
+// - Handwrite Signature input
+
 import 'package:encelade/controller/record_flow/signature.dart';
 import 'package:encelade/view/common/widgets/scadfold_record_flow.dart';
 import 'package:flutter/material.dart';

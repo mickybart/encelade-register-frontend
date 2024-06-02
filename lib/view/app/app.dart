@@ -1,3 +1,10 @@
+// The main app entry
+//
+// Features supported:
+// - Page navigation
+// - Translation
+// - Theme
+
 import 'package:encelade/services/language.dart';
 import 'package:encelade/translations/messages.dart';
 import 'package:encelade/view/app/navigation.dart';

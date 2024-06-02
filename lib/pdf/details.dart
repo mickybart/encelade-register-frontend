@@ -1,3 +1,5 @@
+// Generate Record Details content in PDF
+
 import 'dart:typed_data';
 
 import 'package:encelade/model/types/record.dart';

@@ -1,3 +1,10 @@
+// Implementation of Register proto
+//
+// Special Controller used as a provider to communicate with the register
+// This is the main entrypoint to create, update and request records to and from the register
+//
+// grpc and grpc-web are used
+
 import 'package:encelade/model/proto/google/protobuf/empty.pb.dart' as protog_e;
 import 'package:encelade/model/proto/register.pbgrpc.dart' as proto;
 import 'package:encelade/model/types/event_type.dart';

@@ -1,3 +1,10 @@
+// A Inside Outside page
+//
+// Used to determine when a client enter or exit the office
+//
+// Features supported:
+// - Clock input
+
 import 'package:encelade/controller/record_flow/inside_outside.dart';
 import 'package:encelade/translations/get_date_format.dart';
 import 'package:encelade/view/common/widgets/scadfold_record_flow.dart';

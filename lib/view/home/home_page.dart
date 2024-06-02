@@ -1,3 +1,10 @@
+// A Home page
+//
+// Used to provide a welcome page with some subcategories
+//
+// Features supported:
+// - Manage the register
+
 import 'package:encelade/controller/home.dart';
 import 'package:encelade/services/language.dart';
 import 'package:encelade/view/home/widgets/sub_page_section.dart';

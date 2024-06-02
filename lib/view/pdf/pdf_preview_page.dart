@@ -1,3 +1,12 @@
+// A PDF Preview page
+//
+// This page can be used by any controller using IPdfController
+//
+// Features supported:
+// - PDF Sharing
+// - PDF Printing
+// - PDF Preview
+
 import 'package:encelade/controller/interfaces/i_pdf_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

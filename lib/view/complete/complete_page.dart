@@ -1,3 +1,10 @@
+// A Completed page
+//
+// Used to confirm that the record is verified and conform. This is the end of the flow.
+//
+// Features supported:
+// - Final validation by submitting the record
+
 import 'package:encelade/controller/record_flow/complete.dart';
 import 'package:encelade/view/common/widgets/scadfold_record_flow.dart';
 import 'package:flutter/material.dart';

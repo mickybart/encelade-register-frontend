@@ -1,3 +1,7 @@
+// Service to manager the storage
+//
+// Used to persist data
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 

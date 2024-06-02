@@ -1,3 +1,7 @@
+// Wrapper for DateFormat
+//
+// Partial overriding of DateFormat with Get.locale usage to show the date in the local format
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 

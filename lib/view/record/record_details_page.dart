@@ -1,3 +1,12 @@
+// A Record Details page
+//
+// Display all informations relative to a record in the register.
+//
+// Features supported:
+// - PDF Sharing
+// - PDF Printing
+// - PDF Preview
+
 import 'package:encelade/controller/record_details.dart';
 import 'package:encelade/translations/get_date_format.dart';
 import 'package:encelade/view/record/widgets/record_details_state.dart';

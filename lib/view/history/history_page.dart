@@ -1,3 +1,14 @@
+// An history page for the register
+//
+// Used to display a list of sub set records from the register
+//
+// Features supported:
+// - Fitler based on a range of time and record states
+// - PDF Sharing
+// - PDF Printing
+// - PDF Preview
+// - Display details per record
+
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:encelade/controller/history.dart';
 import 'package:encelade/translations/get_date_format.dart';

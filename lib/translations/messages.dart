@@ -1,3 +1,5 @@
+// Translations entrypoint for App
+
 import 'package:encelade/translations/locales/en_ca.dart';
 import 'package:encelade/translations/locales/fr_ca.dart';
 import 'package:get/get.dart';

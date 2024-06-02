@@ -1,3 +1,8 @@
+// A Scaffold for Record Flow
+//
+// Used by record flow steps to reduce code duplication and simplified implementation.
+// Compatible with any controller using IRemoteRegisterController
+
 import 'package:encelade/controller/interfaces/i_remote_register_controller.dart';
 import 'package:encelade/view/common/widgets/icon_progress.dart';
 import 'package:encelade/view/common/snackbar.dart';

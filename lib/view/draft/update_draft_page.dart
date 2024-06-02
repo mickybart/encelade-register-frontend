@@ -1,3 +1,10 @@
+// A draft updater page
+//
+// Used to update a draft with some inputs about products required.
+//
+// Features supported:
+// - request summary input
+
 import 'package:encelade/controller/record_flow/update_draft.dart';
 import 'package:encelade/view/common/widgets/scadfold_record_flow.dart';
 import 'package:flutter/material.dart';
