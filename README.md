@@ -21,6 +21,8 @@ The backend is provided by [encelade-register-backend](https://github.com/mickyb
 
 running on GNU/Linux, Web and Android Emulator in the same time.
 
+https://github.com/mickybart/encelade-register-frontend/assets/8508218/03cdeafb-931c-43db-9250-3be7650fca7e
+
 ## Development
 
 ### Setup
