@@ -85,3 +85,11 @@ flutter build appbundle --release
 # alt
 # flutter build apk --release
 ```
+
+#### Windows platform target
+
+```bash
+flutter build windows --release
+
+# package location: build\windows\x64\runner\Release\
+```
